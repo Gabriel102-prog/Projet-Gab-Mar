@@ -13,6 +13,7 @@ print("Veuillez entrer le numéro de l'option souhaitée\n 0. Quitter le program
       "2. Rechercher des médias selon différents critères\n 3.Afficher les détails d'un média spécifique\n "
       "4.Ajouter un nouvel utilisateur\n 5. Emprunter un média\n 6. Retourner un média\n "
       "7. Afficher l'historique d'un utilisateur\n 8. Consulter les statistiques de la médiathèque")
+
 choix_action = input("---")
 while True:
     if choix_action == "0":
