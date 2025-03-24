@@ -42,6 +42,7 @@ class Medias(ABC):
         pass
     pass
 
+
 class Livre(Medias):    #TODO vérifier si Empruntable est implanter
     def __init__(self, identifiant, titre, annee_parution, genre, auteur, nombre_pages):
         super().__init__(identifiant, titre, annee_parution, genre)
