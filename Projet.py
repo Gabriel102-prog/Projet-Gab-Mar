@@ -1,4 +1,6 @@
 from termcolor import colored
+import os
+os.environ["FORCE_COLOR"] = "1"
 from abc import ABC, abstractmethod
 # Projet 1 / Gabriel Bertrand et Marius Séguin / 2025-03-21
 # Système de Gestion de Médiathèque
@@ -14,15 +16,14 @@ class Mediatheque:
     """Classe sevant à la gestion globale du programme"""
     pass
 
-class Empruntable(ABC):
-    pass
 
 class Medias(ABC):
-    def __init__(self, identifiant, titre, annee_parution, genre):
+    def __init__(self, identifiant, titre, annee_parution, genre,empruntable):
         self.__identifiant = identifiant
         self.__titre = titre
         self.__annee_parution = annee_parution
         self.__genre = genre
+        self.__empruntable = empruntable
 
     def get_identifiant(self):
         return self.__identifiant
@@ -41,7 +42,7 @@ class Medias(ABC):
         pass
     pass
 
-class Livre(Medias, Empruntable):    #TODO vérifier si Empruntable est implanter
+class Livre(Medias):    #TODO vérifier si Empruntable est implanter
     def __init__(self, identifiant, titre, annee_parution, genre, auteur, nombre_pages):
         super().__init__(identifiant, titre, annee_parution, genre)
         self.__auteur = auteur
@@ -51,13 +52,13 @@ class Livre(Medias, Empruntable):    #TODO vérifier si Empruntable est implante
         return f"Livre: {self.titre} de {self.auteur}, Genre: {self.genre}, Pages: {self.__nombre_pages}"  #TODO get nombres pages avant et finir la ligne
     pass
 
-class DVD(Medias, Empruntable):
+class DVD(Medias):
     def __init__(self,realisateur, duree_minutes):
         self.__realisateur = realisateur
         self.__duree_minutes = duree_minutes
     pass
 
-class CD(Medias, Empruntable):
+class CD(Medias):
     def __init__(self,artiste, nombre_pistes):
         self.__artiste = artiste
         self.__nombre_pistes = nombre_pistes
@@ -65,7 +66,7 @@ class CD(Medias, Empruntable):
 
 
 # Menu interactif
-print(colored(" Bonjour sur le site Web de Médiathèque.", "blue"))  # TODO ajouter couleur
+print(colored(" Bienvenue sur le site Web de Médiathèque.", "blue"))  # TODO ajouter couleur
 while True:
     print("\n Veuillez entrer le numéro de l'option souhaitée\n 0. Quitter le programme 1. Ajouter un média (livre, DVD ou CD)\n "
         "2. Rechercher des médias (par titre, genre, année, disponibilité)\n 3.Afficher les détails d'un média spécifique\n "
