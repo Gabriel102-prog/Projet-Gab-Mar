@@ -65,30 +65,30 @@ class CD(Medias, Empruntable):
 
 
 # Menu interactif
-print("Bonjour sur le site Web de Médiathèque.")  # TODO ajouter couleur
+print(colored(" Bonjour sur le site Web de Médiathèque.", "blue"))  # TODO ajouter couleur
 while True:
-    print("Veuillez entrer le numéro de l'option souhaitée\n 0. Quitter le programme 1. Ajouter un média (livre, DVD ou CD)\n "
+    print("\n Veuillez entrer le numéro de l'option souhaitée\n 0. Quitter le programme 1. Ajouter un média (livre, DVD ou CD)\n "
         "2. Rechercher des médias (par titre, genre, année, disponibilité)\n 3.Afficher les détails d'un média spécifique\n "
         "4.Ajouter un nouvel utilisateur\n 5. Emprunter un média\n 6. Retourner un média\n "
         "7. Afficher l'historique d'un utilisateur\n 8. Consulter les statistiques de la médiathèque")
 
-    choix_action = input("---")
+    choix_action = input(">")
     if choix_action == "0":
         print("Il a été un plaisir de vous servir.Aure voir!")
         break
-    elif choix_action == "1":
+    if choix_action == "1":
         pass
-    elif choix_action == "2":
+    if choix_action == "2":
         pass
-    elif choix_action == "3":
+    if choix_action == "3":
         pass
-    elif choix_action == "4":
+    if choix_action == "4":
         pass
-    elif choix_action == "5":
+    if choix_action == "5":
         pass
-    elif choix_action == "6":
+    if choix_action == "6":
         pass
-    elif choix_action == "7":
+    if choix_action == "7":
         pass
     else:
         print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 7", "red"))
