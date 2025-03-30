@@ -25,25 +25,35 @@ class Medias(ABC):
         self.__titre = titre
         self.__annee_parution = annee_parution
         self.__genre = genre
-        self.__empruntable = disponible
+        self.__disponible = disponible
 
-    def get_identifiant(self):
+    @property
+    def identifiant(self):
         return self.__identifiant
 
-    def get_titre(self):
+    @property
+    def titre(self):
         return self.__titre
 
-    def get_annee_parution(self):
+    @property
+    def annee_parution(self):
         return self.__annee_parution
 
-    def get_genre(self):
+    @property
+    def genre(self):
         return self.__genre
 
-    @abstractmethod
-    def afficher_info(self):
-        pass
+    @property
+    def disponible(self):
+        return self.__disponible
 
-    pass
+    @disponible.setter
+    def disponible(self, nouvelle_valeur):
+        self.__disponible = nouvelle_valeur
+
+    @abstractmethod
+    def afficher_media(self):
+        pass
 
 
 class Livre(Medias):  # TODO vérifier si Empruntable est implanter
@@ -52,10 +62,20 @@ class Livre(Medias):  # TODO vérifier si Empruntable est implanter
         self.__auteur = auteur
         self.__nombre_pages = nombre_pages
 
-    def afficher_info(self):
-        return f"Livre: {self.__titre} de {self.__auteur}, Genre: {self.__genre}, Pages: {self.__nombre_pages}"  # TODO get nombres pages avant et finir la ligne
+    @property
+    def nb_pages(self):
+        return self.__nombre_pages
 
-    pass
+    @property
+    def auteur(self):
+        return self.__auteur
+
+    def afficher_media(self):
+        if Livre.disponible:
+            i = "Ce Livre est disponible"
+        else:
+            i = "Ce Livre n'est pas disponible"
+        return f"Livre: {Livre.titre}, Auteur: {Livre.auteur}, Genre: {Livre.genre},\nPages: {Livre.nb_pages}, Année de parution: {Livre.annee_parution}, Identifiant: {Livre.identifiant}, Disponibilité: {i}"
 
 
 class DVD(Medias):
@@ -64,7 +84,20 @@ class DVD(Medias):
         self.__realisateur = realisateur
         self.__duree_minutes = duree_minutes
 
-    pass
+    @property
+    def realisateur(self):
+        return self.__realisateur
+
+    @property
+    def duree_minutes(self):
+        return self.__duree_minutes
+
+    def afficher_media(self):
+        if DVD.disponible:
+            i = "Ce DVD est disponible"
+        else:
+            i = "Ce DVD n'est pas disponible"
+        return f"DVD: {DVD.titre}, Réalisateur: {DVD.realisateur}, Genre: {DVD.genre},\nDurée: {DVD.duree_minutes}, Année de parution:{DVD.annee_parution}, Identifiant: {DVD.identifiant}, Disponiblité: {i}"
 
 
 class CD(Medias):
@@ -73,7 +106,21 @@ class CD(Medias):
         self.__artiste = artiste
         self.__nombre_pistes = nombre_pistes
 
-    pass
+    @property
+    def artiste(self):
+        return self.__artiste
+
+    @property
+    def nombre_pistes(self):
+        return self.__nombre_pistes
+
+    def afficher_media(self):
+        if CD.disponible:
+            i = "Ce CD est disponible"
+        else:
+            i = "Ce CD n'est pas disponible"
+        return f"CD: {CD.titre}, Artiste: {CD.artiste}, Genre: {CD.genre},\nNombre de pistes: {CD.nombre_pistes}, Année de parution:{CD.annee_parution}, Identifiant: {CD.identifiant}, Disponibilité: {i}"
+
 
 
 # Menu interactif
