@@ -20,12 +20,12 @@ class Mediatheque:
 
 
 class Medias(ABC):
-    def __init__(self, identifiant, titre, annee_parution, genre, empruntable):
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible):
         self.__identifiant = identifiant
         self.__titre = titre
         self.__annee_parution = annee_parution
         self.__genre = genre
-        self.__empruntable = empruntable
+        self.__empruntable = disponible
 
     def get_identifiant(self):
         return self.__identifiant
@@ -47,8 +47,8 @@ class Medias(ABC):
 
 
 class Livre(Medias):  # TODO vérifier si Empruntable est implanter
-    def __init__(self, identifiant, titre, annee_parution, genre, empruntable, auteur, nombre_pages):
-        super().__init__(identifiant, titre, annee_parution, genre, empruntable)
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, auteur, nombre_pages):
+        super().__init__(identifiant, titre, annee_parution, genre, disponible)
         self.__auteur = auteur
         self.__nombre_pages = nombre_pages
 
@@ -59,8 +59,8 @@ class Livre(Medias):  # TODO vérifier si Empruntable est implanter
 
 
 class DVD(Medias):
-    def __init__(self, identifiant, titre, annee_parution, genre, empruntable, realisateur, duree_minutes):
-        super().__init__(identifiant, titre, annee_parution, genre, empruntable)
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, realisateur, duree_minutes):
+        super().__init__(identifiant, titre, annee_parution, genre, disponible)
         self.__realisateur = realisateur
         self.__duree_minutes = duree_minutes
 
@@ -68,8 +68,8 @@ class DVD(Medias):
 
 
 class CD(Medias):
-    def __init__(self, identifiant, titre, annee_parution, genre, empruntable, artiste, nombre_pistes):
-        super().__init__(identifiant, titre, annee_parution, genre, empruntable)
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, artiste, nombre_pistes):
+        super().__init__(identifiant, titre, annee_parution, genre, disponible)
         self.__artiste = artiste
         self.__nombre_pistes = nombre_pistes
 
@@ -77,7 +77,7 @@ class CD(Medias):
 
 
 # Menu interactif
-print(colored(" Bienvenue sur le site Web de Médiathèque.", "blue"))  # TODO ajouter couleur
+print(colored(" Bienvenue sur le site Web de Médiathèque.", "blue"))
 while True:
     print(
         "\n Veuillez entrer le numéro de l'option souhaitée\n 0. Quitter le programme 1. Ajouter un média (livre, DVD ou CD)\n "
