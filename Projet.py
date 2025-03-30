@@ -89,19 +89,19 @@ while True:
     if choix_action == "0":
         print("Il a été un plaisir de vous servir.Aure voir!")
         break
-    if choix_action == "1":
+    elif choix_action == "1":
         pass
-    if choix_action == "2":
+    elif choix_action == "2":
         pass
-    if choix_action == "3":
+    elif choix_action == "3":
         pass
-    if choix_action == "4":
+    elif choix_action == "4":
         pass
-    if choix_action == "5":
+    elif choix_action == "5":
         pass
-    if choix_action == "6":
+    elif choix_action == "6":
         pass
-    if choix_action == "7":
+    elif choix_action == "7":
         pass
     else:
         print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 7", "red"))
