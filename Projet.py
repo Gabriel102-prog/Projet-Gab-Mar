@@ -44,23 +44,25 @@ class Medias(ABC):
 
 
 class Livre(Medias):    #TODO vérifier si Empruntable est implanter
-    def __init__(self, identifiant, titre, annee_parution, genre, auteur, nombre_pages):
-        super().__init__(identifiant, titre, annee_parution, genre)
+    def __init__(self, identifiant, titre, annee_parution, genre, empruntable, auteur, nombre_pages):
+        super().__init__(identifiant, titre, annee_parution, genre, empruntable)
         self.__auteur = auteur
         self.__nombre_pages = nombre_pages
 
     def afficher_info(self):
-        return f"Livre: {self.titre} de {self.auteur}, Genre: {self.genre}, Pages: {self.__nombre_pages}"  #TODO get nombres pages avant et finir la ligne
+        return f"Livre: {self.__titre} de {self.__auteur}, Genre: {self.__genre}, Pages: {self.__nombre_pages}"  #TODO get nombres pages avant et finir la ligne
     pass
 
 class DVD(Medias):
-    def __init__(self,realisateur, duree_minutes):
+    def __init__(self, identifiant, titre, annee_parution, genre, empruntable, realisateur, duree_minutes):
+        super().__init__(identifiant, titre, annee_parution, genre, empruntable)
         self.__realisateur = realisateur
         self.__duree_minutes = duree_minutes
     pass
 
 class CD(Medias):
-    def __init__(self,artiste, nombre_pistes):
+    def __init__(self, identifiant, titre, annee_parution, genre, empruntable, artiste, nombre_pistes):
+        super().__init__(identifiant, titre, annee_parution, genre, empruntable)
         self.__artiste = artiste
         self.__nombre_pistes = nombre_pistes
     pass
