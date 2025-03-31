@@ -180,10 +180,9 @@ class Utilisateur:
     def historique(self):
         return self.__historique
 
-
-    def cree_identifiant(self, nombre_utilisateurs):
-        nombre = nombre_utilisateurs + 1
-        return f"U{str(nombre).zfill(8)}"
+def cree_identifiant(nombre_utilisateurs):
+    nombre = nombre_utilisateurs + 1
+    return f"U{str(nombre).zfill(8)}"
 
 
 # Menu interactif
