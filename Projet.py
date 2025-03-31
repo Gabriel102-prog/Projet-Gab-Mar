@@ -27,6 +27,14 @@ class Mediatheque:
     def ajouter_utilisateur(self, nouveau_utilisateur):
         """Méthode pour ajouter un article à la liste"""
         self.__utilisateurs.append(nouveau_utilisateur)
+
+    def afficher_tous_utilisateurs(self):
+        if len(self.__utilisateurs) > 0:
+            for i in range(len(self.__utilisateurs)):
+                print(self.__utilisateurs[i])
+        else:
+            print("Aucun utilisateur n'est enregistré.")
+
     # TODO possible de réutiliser
     # def afficher_utilisateurs(self):
     #     """Méthode pour afficher tous les utilisateurs de la médiathèque"""
@@ -173,9 +181,9 @@ class Utilisateur:
         return self.__historique
 
 
-def cree_identifiant(nombre_utilisateurs):
-    nombre = nombre_utilisateurs + 1
-    return f"U{str(nombre).zfill(8)}"
+    def cree_identifiant(self, nombre_utilisateurs):
+        nombre = nombre_utilisateurs + 1
+        return f"U{str(nombre).zfill(8)}"
 
 
 # Menu interactif
@@ -196,7 +204,8 @@ while True:
     elif choix_action == "1":
         pass
     elif choix_action == "2":
-        pass
+        Mediatheque.afficher_tous_utilisateurs()
+
     elif choix_action == "3":
         pass
     elif choix_action == "4":
