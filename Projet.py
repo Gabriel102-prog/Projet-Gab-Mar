@@ -189,14 +189,15 @@ class Utilisateur:
         return f"{self.nom}, {self.prenom}"
 
 
-def cree_identifiant(nombre_utilisateurs):
-    nombre = nombre_utilisateurs + 1
-    return f"U{str(nombre).zfill(8)}"
+
 
 
 # Menu interactif
 print(colored(" Bienvenue sur le site Web de Médiathèque.", "blue"))
 nombre_utilisateur = 0
+def cree_identifiant(nombre_utilisateurs):
+    nombre = nombre_utilisateurs + 1
+    return f"U{str(nombre).zfill(8)}"
 mediatheque = Mediatheque()
 while True:
     print(
@@ -209,17 +210,18 @@ while True:
         "5. Emprunter un média\n "
         "6. Retourner un média\n "
         "7. Afficher l'historique d'un utilisateur\n "
-        "8. Consulter les statistiques de la médiathèque")
+        "8. Consulter les statistiques de la médiathèque\n "
+        "9. Afficher tous les utilisateurs\n "
+        "10. Afficher tous les médias")
 
     choix_action = input(">")
     if choix_action == "0":
-        print("Il a été un plaisir de vous servir.Aure voir!")
+        print("Il a été un plaisir de vous servir. Au revoir!")
         break
     elif choix_action == "1":
         pass
     elif choix_action == "2":
-        mediatheque.afficher_tous_utilisateurs()
-
+        pass
     elif choix_action == "3":
         pass
     elif choix_action == "4":
@@ -241,6 +243,10 @@ while True:
     elif choix_action == "7":
         pass
     elif choix_action == "8":
+        pass
+    elif choix_action == "9":
+        pass
+    elif choix_action == "10":
         pass
     else:
         print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 7", "red"))
