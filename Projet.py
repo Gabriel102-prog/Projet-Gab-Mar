@@ -201,7 +201,7 @@ mediatheque = Mediatheque()
 while True:
     print(
         "\n Veuillez entrer le numéro de l'option souhaitée\n "
-        "0. Quitter le programme "
+        "0. Quitter le programme \n "
         "1. Ajouter un média (livre, DVD ou CD)\n "
         "2. Rechercher des médias (par titre, genre, année, disponibilité)\n "
         "3. Afficher les détails d'un média spécifique\n "
