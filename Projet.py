@@ -30,6 +30,8 @@ class Mediatheque:
 
     def afficher_tous_utilisateurs(self):
         if len(self.__utilisateurs) > 0:
+            print("Liste des utilisateurs :")
+            print("nom       prénom")
             for i in range(len(self.__utilisateurs)):
                 print(self.__utilisateurs[i])
         else:
@@ -102,8 +104,9 @@ class Livre(Medias):  # TODO vérifier si Empruntable est implanter
             i = "Ce Livre est disponible"
         else:
             i = "Ce Livre n'est pas disponible"
-        return (f"Livre: {Livre.titre}, Auteur: {Livre.auteur}, Genre: {Livre.genre},\n"
-                f"Pages: {Livre.nb_pages}, Année de parution: {Livre.annee_parution}, Identifiant: {Livre.identifiant}, Disponibilité: {i}")
+        return (f"Livre: {self.titre}, Auteur: {self.auteur}, Genre: {self.genre},\n"
+                f"Pages: {self.nb_pages}, Année de parution: {self.annee_parution}, "
+                f"Identifiant: {self.identifiant}, Disponibilité: {i}")
 
 
 class DVD(Medias):
@@ -125,8 +128,9 @@ class DVD(Medias):
             i = "Ce DVD est disponible"
         else:
             i = "Ce DVD n'est pas disponible"
-        return (f"DVD: {DVD.titre}, Réalisateur: {DVD.realisateur}, Genre: {DVD.genre},\n"
-                f"Durée: {DVD.duree_minutes}, Année de parution:{DVD.annee_parution}, Identifiant: {DVD.identifiant}, Disponiblité: {i}")
+        return (f"DVD: {self.titre}, Réalisateur: {self.realisateur}, Genre: {self.genre},\n"
+                f"Durée: {self.duree_minutes}, Année de parution:{self.annee_parution}, "
+                f"Identifiant: {self.identifiant}, Disponiblité: {i}")
 
 
 class CD(Medias):
@@ -148,8 +152,9 @@ class CD(Medias):
             i = "Ce CD est disponible"
         else:
             i = "Ce CD n'est pas disponible"
-        return (f"CD: {CD.titre}, Artiste: {CD.artiste}, Genre: {CD.genre},\n"
-                f"Nombre de pistes: {CD.nombre_pistes}, Année de parution:{CD.annee_parution}, Identifiant: {CD.identifiant}, Disponibilité: {i}")
+        return (f"CD: {self.titre}, Artiste: {self.artiste}, Genre: {self.genre},\n"
+                f"Nombre de pistes: {self.nombre_pistes}, Année de parution:{self.annee_parution}, "
+                f"Identifiant: {self.identifiant}, Disponibilité: {i}")
 
 
 class Utilisateur:
@@ -180,6 +185,10 @@ class Utilisateur:
     def historique(self):
         return self.__historique
 
+    def __str__(self):
+        return f"{self.nom}, {self.prenom}"
+
+
 def cree_identifiant(nombre_utilisateurs):
     nombre = nombre_utilisateurs + 1
     return f"U{str(nombre).zfill(8)}"
@@ -188,13 +197,19 @@ def cree_identifiant(nombre_utilisateurs):
 # Menu interactif
 print(colored(" Bienvenue sur le site Web de Médiathèque.", "blue"))
 nombre_utilisateur = 0
-mediateque = Mediatheque()
+mediatheque = Mediatheque()
 while True:
     print(
-        "\n Veuillez entrer le numéro de l'option souhaitée\n 0. Quitter le programme 1. Ajouter un média (livre, DVD ou CD)\n "
-        "2. Rechercher des médias (par titre, genre, année, disponibilité)\n 3. Afficher les détails d'un média spécifique\n "
-        "4. Ajouter un nouvel utilisateur\n 5. Emprunter un média\n 6. Retourner un média\n "
-        "7. Afficher l'historique d'un utilisateur\n 8. Consulter les statistiques de la médiathèque")
+        "\n Veuillez entrer le numéro de l'option souhaitée\n "
+        "0. Quitter le programme "
+        "1. Ajouter un média (livre, DVD ou CD)\n "
+        "2. Rechercher des médias (par titre, genre, année, disponibilité)\n "
+        "3. Afficher les détails d'un média spécifique\n "
+        "4. Ajouter un nouvel utilisateur\n "
+        "5. Emprunter un média\n "
+        "6. Retourner un média\n "
+        "7. Afficher l'historique d'un utilisateur\n "
+        "8. Consulter les statistiques de la médiathèque")
 
     choix_action = input(">")
     if choix_action == "0":
@@ -203,7 +218,7 @@ while True:
     elif choix_action == "1":
         pass
     elif choix_action == "2":
-        Mediatheque.afficher_tous_utilisateurs()
+        mediatheque.afficher_tous_utilisateurs()
 
     elif choix_action == "3":
         pass
@@ -216,8 +231,8 @@ while True:
         email_identification = input("Qu'elle est votre email? :")
         # Class
         utilisateur = Utilisateur(identifiant_identification, nom_identification, prenom_identification,
-                                  email_identification, None)
-        mediateque.ajouter_utilisateur(utilisateur)
+                                  email_identification, {})
+        mediatheque.ajouter_utilisateur(utilisateur)
         print(f"Votre identifiant est {identifiant_identification}")
     elif choix_action == "5":
         pass
