@@ -245,7 +245,7 @@ while True:
     elif choix_action == "8":
         pass
     elif choix_action == "9":
-        pass
+        mediatheque.afficher_tous_utilisateurs()
     elif choix_action == "10":
         pass
     else:
