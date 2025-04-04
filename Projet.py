@@ -69,13 +69,19 @@ class Empruntable(ABC):
 
 
 class Medias(ABC):
-    def __init__(self, identifiant, titre, annee_parution, genre, disponible, date_retour):
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt):
         self.__identifiant = identifiant
         self.__titre = titre
         self.__annee_parution = annee_parution
         self.__genre = genre
         self.__disponible = disponible
         self.__date_retour = datetime.now
+        self.__date_emprunt = date_emprunt
+        self.__date_retour = date_retour
+
+    @property
+    def date_emprunt(self):
+        return self.__date_emprunt
 
     @property
     def date_retour(self):
@@ -111,24 +117,37 @@ class Medias(ABC):
 
 
 class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
-    def __init__(self, identifiant, titre, annee_parution, genre, disponible, auteur, nombre_pages, date_retour):
-        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour)
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, auteur, nombre_pages, date_retour,
+                 date_emprunt):
+        if date_emprunt is None:
+            date_emprunt = datetime.now()
+        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour,
+                         date_emprunt)
         self.__auteur = auteur
         self.__nombre_pages = nombre_pages
+        self.__date_emprunt = date_emprunt
 
     @property
     def date_retour_max(self):
-        return datetime.now() + timedelta(days=21)
+        return self.__date_emprunt + timedelta(days=21)
 
     def emprunter(self):
         if self.__disponible:
             self.__disponible = False
+            print("Le Livre est disponible, vous l'avez emprunté.")
         else:
-            print("Le média que vous voulez emprunter est actuellement indisponible.")
+            print("Le Livre que vous voulez emprunter est actuellement indisponible.")
 
     def retourner(self):
         self.__disponible = True
         self.__date_retour = datetime.now()
+        if self.date_retour_max >= self.__date_retour:
+            print("Merci d'avoir emprunté ce livre, à la prochaine.")
+            return 0  # retourne le nb de jours de retard
+        else:
+            print("Attention, vous avez remis votre livre en retard.")
+            print(f"Jours de retard: {(self.date_retour_max - self.__date_retour).days} jours")
+            return (self.date_retour_max - self.__date_retour).days  # retourne le nb de jours de retard
 
     @property
     def nb_pages(self):
@@ -149,10 +168,36 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
 
 
 class DVD(Medias):
-    def __init__(self, identifiant, titre, annee_parution, genre, disponible, realisateur, duree_minutes, date_retour):
-        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour)
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, realisateur, duree_minutes, date_retour,
+                 date_emprunt):
+        if date_emprunt is None:
+            date_emprunt = datetime.now()
+        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt)
         self.__realisateur = realisateur
         self.__duree_minutes = duree_minutes
+        self.__date_emprunt = date_emprunt
+
+    @property
+    def date_retour_max(self):
+        return self.__date_emprunt + timedelta(days=14)
+
+    def emprunter(self):
+        if self.__disponible:
+            self.__disponible = False
+            print("Le DVD est disponible, vous l'avez emprunté.")
+        else:
+            print("Le DVD que vous voulez emprunter est actuellement indisponible.")
+
+    def retourner(self):
+        self.__disponible = True
+        self.__date_retour = datetime.now()
+        if self.date_retour_max >= self.__date_retour:
+            print("Merci d'avoir emprunté ce livre, à la prochaine.")
+            return 0  # retourne le nb de jours de retard
+        else:
+            print("Attention, vous avez remis votre DVD en retard.")
+            print(f"Jours de retard: {(self.date_retour_max - self.__date_retour).days} jours")
+            return (self.date_retour_max - self.__date_retour).days  # retourne le nb de jours de retard
 
     @property
     def realisateur(self):
@@ -173,10 +218,36 @@ class DVD(Medias):
 
 
 class CD(Medias):
-    def __init__(self, identifiant, titre, annee_parution, genre, disponible, artiste, nombre_pistes, date_retour):
-        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour)
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, artiste, nombre_pistes, date_retour,
+                 date_emprunt):
+        if date_emprunt is None:
+            date_emprunt = datetime.now()
+        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt)
         self.__artiste = artiste
         self.__nombre_pistes = nombre_pistes
+        self.__date_emprunt = date_emprunt
+
+    @property
+    def date_retour_max(self):
+        return self.__date_emprunt + timedelta(days=14)
+
+    def emprunter(self):
+        if self.__disponible:
+            self.__disponible = False
+            print("Le CD est disponible, vous l'avez emprunté.")
+        else:
+            print("Le CD que vous voulez emprunter est actuellement indisponible.")
+
+    def retourner(self):
+        self.__disponible = True
+        self.__date_retour = datetime.now()
+        if self.date_retour_max >= self.__date_retour:
+            print("Merci d'avoir emprunté ce livre, à la prochaine.")
+            return 0  # retourne le nb de jours de retard
+        else:
+            print("Attention, vous avez remis votre CD en retard.")
+            print(f"Jours de retard: {(self.date_retour_max - self.__date_retour).days} jours")
+            return (self.date_retour_max - self.__date_retour).days  # retourne le nb de jours de retard
 
     @property
     def artiste(self):
@@ -197,12 +268,12 @@ class CD(Medias):
 
 
 class Utilisateur:
-    def __init__(self, identifiant, nom, prenom, email, historique):
+    def __init__(self, identifiant, nom, prenom, email, historique={}):  # TODO voir le probleme
         self.__identifiant = identifiant
         self.__nom = nom
         self.__prenom = prenom
         self.__email = email
-        self.__historique = {}
+        self.__historique = historique
 
     @property
     def identifiant(self):
@@ -236,8 +307,6 @@ nombre_dvd = 0
 nombre_cd = 0
 
 
-
-
 def cree_identifiant(nombre_utilisateurs):
     nombre = nombre_utilisateurs + 1
     return f"U{str(nombre).zfill(8)}"
@@ -256,8 +325,6 @@ def cree_identifiant_dvd(nombre_dvd):
 def cree_identifiant_cd(nombre_cd):
     nombre = nombre_cd + 1
     return f"C{str(nombre).zfill(8)}"
-
-
 
 
 mediatheque = Mediatheque()
