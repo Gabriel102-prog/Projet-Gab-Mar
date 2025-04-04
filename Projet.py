@@ -55,7 +55,6 @@ class Mediatheque:
 
 class Empruntable(ABC):
     @abstractmethod
-    @property
     def date_retour_max(self):
         pass
 
@@ -119,8 +118,6 @@ class Medias(ABC):
 class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, auteur, nombre_pages, date_retour,
                  date_emprunt):
-        if date_emprunt is None:
-            date_emprunt = datetime.now()
         super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour,
                          date_emprunt)
         self.__auteur = auteur
@@ -129,11 +126,13 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
 
     @property
     def date_retour_max(self):
+        self.__date_emprunt = datetime.now()
         return self.__date_emprunt + timedelta(days=21)
 
     def emprunter(self):
         if self.__disponible:
             self.__disponible = False
+            self.__date_emprunt = datetime.now()
             print("Le Livre est disponible, vous l'avez emprunté.")
         else:
             print("Le Livre que vous voulez emprunter est actuellement indisponible.")
@@ -170,8 +169,6 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
 class DVD(Medias):
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, realisateur, duree_minutes, date_retour,
                  date_emprunt):
-        if date_emprunt is None:
-            date_emprunt = datetime.now()
         super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt)
         self.__realisateur = realisateur
         self.__duree_minutes = duree_minutes
@@ -179,11 +176,13 @@ class DVD(Medias):
 
     @property
     def date_retour_max(self):
+        self.__date_emprunt = datetime.now()
         return self.__date_emprunt + timedelta(days=14)
 
     def emprunter(self):
         if self.__disponible:
             self.__disponible = False
+            self.__date_emprunt = datetime.now()
             print("Le DVD est disponible, vous l'avez emprunté.")
         else:
             print("Le DVD que vous voulez emprunter est actuellement indisponible.")
@@ -220,8 +219,6 @@ class DVD(Medias):
 class CD(Medias):
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, artiste, nombre_pistes, date_retour,
                  date_emprunt):
-        if date_emprunt is None:
-            date_emprunt = datetime.now()
         super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt)
         self.__artiste = artiste
         self.__nombre_pistes = nombre_pistes
@@ -229,11 +226,13 @@ class CD(Medias):
 
     @property
     def date_retour_max(self):
+        self.__date_emprunt = datetime.now()
         return self.__date_emprunt + timedelta(days=14)
 
     def emprunter(self):
         if self.__disponible:
             self.__disponible = False
+            self.__date_emprunt = datetime.now()
             print("Le CD est disponible, vous l'avez emprunté.")
         else:
             print("Le CD que vous voulez emprunter est actuellement indisponible.")
