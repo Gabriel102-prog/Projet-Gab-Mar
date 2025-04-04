@@ -343,7 +343,7 @@ while True:
         " 9. Afficher tous les utilisateurs\n "
         "10. Afficher tous les médias")
 
-    choix_action = input(">").strip
+    choix_action = input(">")
     if choix_action == "0":
         print("Il a été un plaisir de vous servir. Au revoir!")
         break
@@ -351,7 +351,7 @@ while True:
         while True:
             print("Entrer le numéro correspondant au médias que vous souhaiter entrer:"
                   "\n 1. Livre\n 2. DVD\n 3. CD")
-            sorte_media = input(">").strip
+            sorte_media = input(">")
 
             if sorte_media == "1":
                 identifiant_identification = cree_identifiant_livre(nombre_livre)
@@ -361,8 +361,9 @@ while True:
                 genre_identification = input("Qu'elle est le genre du livre? :")
                 auteur_identification = input("Qu'elle est l'auteur du livre? :")
                 nombre_pages_identification = input("Qu'elle est le nombre de pages du livre? :")
-                livre = Livre("a définir", titre_identification, annee_parution_identification,
-                              genre_identification, True, auteur_identification, nombre_pages_identification)
+                livre = Livre(identifiant_identification, titre_identification, annee_parution_identification,
+                              genre_identification, True, auteur_identification, nombre_pages_identification,
+                              None, None)
                 mediatheque.ajouter_medias(livre)
                 print(f"L'identifiant du livre est maintenant :{identifiant_identification}")
                 break
@@ -374,8 +375,9 @@ while True:
                 genre_identification = input("Qu'elle est le genre du DVD? :")
                 realisateur_identification = input("Qui est le réalisateur du DVD? :")
                 duree_minutes_identification = input("Qu'elle est la durée du DVD? :")
-                dvd = DVD("a définir", titre_identification, annee_parution_identification,
-                          genre_identification, True, realisateur_identification, duree_minutes_identification)
+                dvd = DVD(identifiant_identification, titre_identification, annee_parution_identification,
+                          genre_identification, True, realisateur_identification, duree_minutes_identification
+                          , None, None)
                 mediatheque.ajouter_medias(dvd)
                 print(f"L'identifiant du DVD est maintenant :{identifiant_identification}")
                 break
@@ -387,8 +389,9 @@ while True:
                 genre_identification = input("Qu'elle est le genre du CD? :")
                 artiste_identification = input("Qui est l'artiste de ce CD? :")
                 nombre_pistes_identification = input("Combien de piste à ce CD? :")
-                cd = CD("a définir", titre_identification, annee_parution_identification,
-                        genre_identification, True, artiste_identification, nombre_pistes_identification)
+                cd = CD(identifiant_identification, titre_identification, annee_parution_identification,
+                        genre_identification, True, artiste_identification, nombre_pistes_identification,
+                        None, None)
                 mediatheque.ajouter_medias(cd)
                 print(f"L'identifiant du CD est maintenant :{identifiant_identification}")
                 break
