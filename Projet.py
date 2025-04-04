@@ -25,6 +25,8 @@ class Mediatheque:
         self.__total_emprunts = 0
         self.__total_retours = 0
 
+    def get_medias(self):
+        return self.__medias
     def ajouter_utilisateur(self, nouveau_utilisateur):
         """Méthode pour ajouter un article à la liste"""
         self.__utilisateurs.append(nouveau_utilisateur)
