@@ -330,27 +330,29 @@ def cree_identifiant_cd(nombre_cd):
 mediatheque = Mediatheque()
 while True:
     print(
-        "\n Veuillez entrer le numéro de l'option souhaitée\n "
-        "0. Quitter le programme \n "
-        "1. Ajouter un média (livre, DVD ou CD)\n "
-        "2. Rechercher des médias (par titre, genre, année, disponibilité)\n "
-        "3. Afficher les détails d'un média spécifique\n "
-        "4. Ajouter un nouvel utilisateur\n "
-        "5. Emprunter un média\n "
-        "6. Retourner un média\n "
-        "7. Afficher l'historique d'un utilisateur\n "
-        "8. Consulter les statistiques de la médiathèque\n "
-        "9. Afficher tous les utilisateurs\n "
+        "\n  Veuillez entrer le numéro de l'option souhaitée\n "
+        " 0. Quitter le programme \n "
+        " 1. Ajouter un média (livre, DVD ou CD)\n "
+        " 2. Rechercher des médias (par titre, genre, année, disponibilité)\n "
+        " 3. Afficher les détails d'un média spécifique\n "
+        " 4. Ajouter un nouvel utilisateur\n "
+        " 5. Emprunter un média\n "
+        " 6. Retourner un média\n "
+        " 7. Afficher l'historique d'un utilisateur\n "
+        " 8. Consulter les statistiques de la médiathèque\n "
+        " 9. Afficher tous les utilisateurs\n "
         "10. Afficher tous les médias")
 
-    choix_action = input(">")
+    choix_action = input(">").strip
     if choix_action == "0":
         print("Il a été un plaisir de vous servir. Au revoir!")
         break
     elif choix_action == "1":
-        print("Entrer le numéro correspondant au médias que vous souhaiter ajoutez?\n 1. Livre\n 2. DVD\n 3. CD")
-        sorte_media = input(">")
         while True:
+            print("Entrer le numéro correspondant au médias que vous souhaiter entrer:"
+                  "\n 1. Livre\n 2. DVD\n 3. CD")
+            sorte_media = input(">").strip
+
             if sorte_media == "1":
                 identifiant_identification = cree_identifiant_livre(nombre_livre)
                 nombre_livre += 1
@@ -362,6 +364,7 @@ while True:
                 livre = Livre("a définir", titre_identification, annee_parution_identification,
                               genre_identification, True, auteur_identification, nombre_pages_identification)
                 mediatheque.ajouter_medias(livre)
+                print(f"L'identifiant du livre est maintenant :{identifiant_identification}")
                 break
             elif sorte_media == "2":
                 identifiant_identification = cree_identifiant_dvd(nombre_dvd)
@@ -374,6 +377,7 @@ while True:
                 dvd = DVD("a définir", titre_identification, annee_parution_identification,
                           genre_identification, True, realisateur_identification, duree_minutes_identification)
                 mediatheque.ajouter_medias(dvd)
+                print(f"L'identifiant du DVD est maintenant :{identifiant_identification}")
                 break
             elif sorte_media == "3":
                 identifiant_identification = cree_identifiant_cd(nombre_cd)
@@ -386,15 +390,57 @@ while True:
                 cd = CD("a définir", titre_identification, annee_parution_identification,
                         genre_identification, True, artiste_identification, nombre_pistes_identification)
                 mediatheque.ajouter_medias(cd)
+                print(f"L'identifiant du CD est maintenant :{identifiant_identification}")
                 break
             else:
                 print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre "
                               "1 et 3", "red"))
 
     elif choix_action == "2":
-        pass
+        print("Choisissez un critère de recherche :")
+        print("1. Par titre")
+        print("2. Par genre")
+        print("3. Par année")
+        print("4. Par disponibilité")
+        critere_recherche = input(">").strip()
+
+        if critere_recherche == "1":
+            titre_recherche = input("Entrez le titre du média : ").lower()
+            for media in mediatheque._Mediatheque__medias:
+                if titre_recherche in media.titre.lower():
+                    print(media.afficher_media())
+
+        elif critere_recherche == "2":
+            genre_recherche = input("Entrez le genre du média : ").lower()
+            for media in mediatheque._Mediatheque__medias:
+                if genre_recherche in media.genre.lower():
+                    print(media.afficher_media())
+
+        elif critere_recherche == "3":
+            annee_recherche = input("Entrez l'année de parution du média : ")
+            for media in mediatheque._Mediatheque__medias:
+                if str(media.annee_parution) == annee_recherche:
+                    print(media.afficher_media())
+
+        elif critere_recherche == "4":
+            dispo_recherche = input("Le média est-il disponible ? (oui/non) : ").lower()
+            dispo_bool = dispo_recherche == "oui"
+            for media in mediatheque._Mediatheque__medias:
+                if media.disponible == dispo_bool:
+                    print(media.afficher_media())
     elif choix_action == "3":
-        pass
+        identifiant_media = input("Entrez l'identifiant du média : ").strip()
+        media_trouve = False
+
+        for media in mediatheque._Mediatheque__medias:
+            if media.identifiant == identifiant_media:
+                print(media.afficher_media())
+                media_trouve = True
+                break
+
+        if not media_trouve:
+            print(colored("Média non trouvé. Vérifiez l'identifiant et essayez à nouveau.", "red"))
+
     elif choix_action == "4":
         # Entrée
         identifiant_identification = cree_identifiant(nombre_utilisateur)
