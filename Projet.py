@@ -1,5 +1,6 @@
 from termcolor import colored
 import os
+from datetime import datetime, timedelta
 
 os.environ["FORCE_COLOR"] = "1"
 from abc import ABC, abstractmethod
@@ -52,13 +53,33 @@ class Mediatheque:
     #         print("Aucun utilisateur enregistré.")
 
 
+class Empruntable(ABC):
+    @abstractmethod
+    @property
+    def date_retour_max(self):
+        pass
+
+    @abstractmethod
+    def retourner(self):
+        pass
+
+    @abstractmethod
+    def emprunter(self):
+        pass
+
+
 class Medias(ABC):
-    def __init__(self, identifiant, titre, annee_parution, genre, disponible):
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, date_retour):
         self.__identifiant = identifiant
         self.__titre = titre
         self.__annee_parution = annee_parution
         self.__genre = genre
         self.__disponible = disponible
+        self.__date_retour = datetime.now
+
+    @property
+    def date_retour(self):
+        return self.__date_retour
 
     @property
     def identifiant(self):
@@ -89,11 +110,25 @@ class Medias(ABC):
         pass
 
 
-class Livre(Medias):  # TODO vérifier si Empruntable est implanter
-    def __init__(self, identifiant, titre, annee_parution, genre, disponible, auteur, nombre_pages):
-        super().__init__(identifiant, titre, annee_parution, genre, disponible)
+class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, auteur, nombre_pages, date_retour):
+        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour)
         self.__auteur = auteur
         self.__nombre_pages = nombre_pages
+
+    @property
+    def date_retour_max(self):
+        return datetime.now() + timedelta(days=21)
+
+    def emprunter(self):
+        if self.__disponible:
+            self.__disponible = False
+        else:
+            print("Le média que vous voulez emprunter est actuellement indisponible.")
+
+    def retourner(self):
+        self.__disponible = True
+        self.__date_retour = datetime.now()
 
     @property
     def nb_pages(self):
@@ -114,8 +149,8 @@ class Livre(Medias):  # TODO vérifier si Empruntable est implanter
 
 
 class DVD(Medias):
-    def __init__(self, identifiant, titre, annee_parution, genre, disponible, realisateur, duree_minutes):
-        super().__init__(identifiant, titre, annee_parution, genre, disponible)
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, realisateur, duree_minutes, date_retour):
+        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour)
         self.__realisateur = realisateur
         self.__duree_minutes = duree_minutes
 
@@ -138,8 +173,8 @@ class DVD(Medias):
 
 
 class CD(Medias):
-    def __init__(self, identifiant, titre, annee_parution, genre, disponible, artiste, nombre_pistes):
-        super().__init__(identifiant, titre, annee_parution, genre, disponible)
+    def __init__(self, identifiant, titre, annee_parution, genre, disponible, artiste, nombre_pistes, date_retour):
+        super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour)
         self.__artiste = artiste
         self.__nombre_pistes = nombre_pistes
 
@@ -201,6 +236,8 @@ nombre_dvd = 0
 nombre_cd = 0
 
 
+
+
 def cree_identifiant(nombre_utilisateurs):
     nombre = nombre_utilisateurs + 1
     return f"U{str(nombre).zfill(8)}"
@@ -219,6 +256,8 @@ def cree_identifiant_dvd(nombre_dvd):
 def cree_identifiant_cd(nombre_cd):
     nombre = nombre_cd + 1
     return f"C{str(nombre).zfill(8)}"
+
+
 
 
 mediatheque = Mediatheque()
