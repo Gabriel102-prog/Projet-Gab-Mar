@@ -28,6 +28,10 @@ class Mediatheque:
         """Méthode pour ajouter un article à la liste"""
         self.__utilisateurs.append(nouveau_utilisateur)
 
+    def ajouter_medias(self, nouveau_medias):
+        """Méthode pour ajouter un article à la liste"""
+        self.__medias.append(nouveau_medias)
+
     def afficher_tous_utilisateurs(self):
         if len(self.__utilisateurs) > 0:
             print("Liste des utilisateurs :")
@@ -189,15 +193,34 @@ class Utilisateur:
         return f"{self.nom}, {self.prenom}"
 
 
-
-
-
 # Menu interactif
 print(colored(" Bienvenue sur le site Web de Médiathèque.", "blue"))
 nombre_utilisateur = 0
+nombre_livre = 0
+nombre_dvd = 0
+nombre_cd = 0
+
+
 def cree_identifiant(nombre_utilisateurs):
     nombre = nombre_utilisateurs + 1
     return f"U{str(nombre).zfill(8)}"
+
+
+def cree_identifiant_livre(nombre_livre):
+    nombre = nombre_livre + 1
+    return f"L{str(nombre).zfill(8)}"
+
+
+def cree_identifiant_dvd(nombre_dvd):
+    nombre = nombre_dvd + 1
+    return f"D{str(nombre).zfill(8)}"
+
+
+def cree_identifiant_cd(nombre_cd):
+    nombre = nombre_cd + 1
+    return f"C{str(nombre).zfill(8)}"
+
+
 mediatheque = Mediatheque()
 while True:
     print(
@@ -219,7 +242,49 @@ while True:
         print("Il a été un plaisir de vous servir. Au revoir!")
         break
     elif choix_action == "1":
-        pass
+        print("Entrer le numéro correspondant au médias que vous souhaiter ajoutez?\n 1. Livre\n 2. DVD\n 3. CD")
+        sorte_media = input(">")
+        while True:
+            if sorte_media == "1":
+                identifiant_identification = cree_identifiant_livre(nombre_livre)
+                nombre_livre += 1
+                titre_identification = input("Qu'elle est le titre du livre? :")
+                annee_parution_identification = input("Qu'elle est l'année de parution du livre? :")
+                genre_identification = input("Qu'elle est le genre du livre? :")
+                auteur_identification = input("Qu'elle est l'auteur du livre? :")
+                nombre_pages_identification = input("Qu'elle est le nombre de pages du livre? :")
+                livre = Livre("a définir", titre_identification, annee_parution_identification,
+                              genre_identification, True, auteur_identification, nombre_pages_identification)
+                mediatheque.ajouter_medias(livre)
+                break
+            elif sorte_media == "2":
+                identifiant_identification = cree_identifiant_dvd(nombre_dvd)
+                nombre_dvd += 1
+                titre_identification = input("Qu'elle est le titre du DVD? :")
+                annee_parution_identification = input("Qu'elle est l'année de parution du DVD? :")
+                genre_identification = input("Qu'elle est le genre du DVD? :")
+                realisateur_identification = input("Qui est le réalisateur du DVD? :")
+                duree_minutes_identification = input("Qu'elle est la durée du DVD? :")
+                dvd = DVD("a définir", titre_identification, annee_parution_identification,
+                          genre_identification, True, realisateur_identification, duree_minutes_identification)
+                mediatheque.ajouter_medias(dvd)
+                break
+            elif sorte_media == "3":
+                identifiant_identification = cree_identifiant_cd(nombre_cd)
+                nombre_cd += 1
+                titre_identification = input("Qu'elle est le titre du CD? :")
+                annee_parution_identification = input("Qu'elle est l'année de parution du CD? :")
+                genre_identification = input("Qu'elle est le genre du CD? :")
+                artiste_identification = input("Qui est l'artiste de ce CD? :")
+                nombre_pistes_identification = input("Combien de piste à ce CD? :")
+                cd = CD("a définir", titre_identification, annee_parution_identification,
+                        genre_identification, True, artiste_identification, nombre_pistes_identification)
+                mediatheque.ajouter_medias(cd)
+                break
+            else:
+                print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre "
+                              "1 et 3", "red"))
+
     elif choix_action == "2":
         pass
     elif choix_action == "3":
@@ -249,4 +314,5 @@ while True:
     elif choix_action == "10":
         pass
     else:
-        print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
+        print(
+            colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
