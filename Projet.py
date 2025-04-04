@@ -294,6 +294,7 @@ class Utilisateur:
     def historique(self):
         return self.__historique
 
+
     def __str__(self):
         return f"{self.nom}, {self.prenom}"
 
