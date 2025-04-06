@@ -551,9 +551,63 @@ while True:
                             break
 
     elif choix_action == "6":
-        pass
+        while True:
+            identifiant_retour = input("Qu'elle est votre identifiant? :")
+            utilisateur_retour = None
+            for i in mediatheque.utilisateurs:
+                if i.identifiant == identifiant_retour:
+                    utilisateur_retour = i
+                    break
+            if utilisateur_retour is None:
+                print(colored("L'identifiant entré n'est pas reconnu dans la base de donnée", "red"))
+                break
+            else:
+                liste_emprunt = utilisateur_retour.historique["Médias empruntés"]
+                if len(liste_emprunt) == 0:
+                    print(colored("Aucun média emprunté", "red"))
+                else:
+                    while True:
+                        q = 0
+                        for p in liste_emprunt:
+                            q += 1
+                            print(f"{q}e emprunt :{liste_emprunt[p]}")
+                        choix_emprunt = int(
+                            input("Quel média voulez vous retourner ? (le premier :1, deuxième: 2, etc.):"))
+                        if choix_emprunt not in [i + 1 for i in range(len(liste_emprunt))]:
+                            print(colored("option invalide veuillez recommencer", "red"))
+                            continue
+                        media_choisi = liste_emprunt[choix_emprunt - 1]
+                        nb_jours_retard = media_choisi.retourner()
+                        frais_retard = nb_jours_retard * 0.25
+                        utilisateur_retour.historique["Médias retournés"].append(media_choisi)
+                        utilisateur_retour.historique["Frais de retard total"] += frais_retard
+                        break
     elif choix_action == "7":
-        pass
+        while True:
+            identifiant_historique = input("Qu'elle est votre identifiant? :")
+            utilisateur_hisorique = None
+            for i in mediatheque.utilisateurs:
+                if i.identifiant == identifiant_historique:
+                    utilisateur_hisorique = i
+                    break
+            if utilisateur_hisorique is None:
+                print(colored("L'identifiant entré n'est pas reconnu dans la base de donnée", "red"))
+                break
+            print("Médias empruntés:")
+            if not utilisateur_hisorique.historique["Médias empruntés"]:
+                print(f"Aucun média n'a été emprunté par {utilisateur_hisorique.prenom} {utilisateur_hisorique.nom}.")
+            else:
+                for x in utilisateur_hisorique.historique["Médias empruntés"]:
+                    print(x)
+
+            print("Médias retournés:")
+            if not utilisateur_hisorique.historique["Médias retournés"]:
+                print(f"Aucun média n'a été retourné par {utilisateur_hisorique.prenom} {utilisateur_hisorique.nom}.")
+            else:
+                for x in utilisateur_hisorique.historique["Médias retournés"]:
+                    print(x)
+            print(f"Frais de retard total depuis la création de cet utilisateur: {utilisateur_hisorique.historique["Frais de retard total"]}$")
+
     elif choix_action == "8":
         print("Medias".center(60, "*"))
         nombre_livres = sum(1 for media in mediatheque.medias if isinstance(media, Livre))
