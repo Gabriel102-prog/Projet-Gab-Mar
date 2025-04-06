@@ -51,9 +51,10 @@ class Mediatheque:
         if len(self.__medias) > 0:
             print("Liste des médias :")
             for media1 in self.__medias:
-                media1.afficher_media()  # Appelle la méthode d'affichage spécifique à chaque média
+                print(media1.afficher_media())  # Affiche le résultat retourné par la méthode
         else:
             print("Aucun média n'est enregistré.")
+
 
 class Empruntable(ABC):
     @abstractmethod
@@ -482,5 +483,6 @@ while True:
     elif choix_action == "10":
         mediatheque.afficher_tous_medias()
     else:
-        print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
-# test
+        print(
+            colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
+
