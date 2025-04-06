@@ -166,7 +166,7 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
         return self.__auteur
 
     def afficher_media(self):
-        if self.__disponible:
+        if self.disponible:
             i = "Ce Livre est disponible"
         else:
             i = "Ce Livre n'est pas disponible"
@@ -184,13 +184,13 @@ class DVD(Medias, Empruntable):
 
     @property
     def date_retour_max(self):
-        self.__date_emprunt = datetime.now()
-        return self.__date_emprunt + timedelta(days=14)
+        self.date_emprunt = datetime.now()
+        return self.date_emprunt + timedelta(days=14)
 
     def emprunter(self):
-        if self.__disponible:
-            self.__disponible = False
-            self.__date_emprunt = datetime.now()
+        if self.disponible:
+            self.disponible = False
+            self.date_emprunt = datetime.now()
             print(
                 f"Le DVD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
         else:
@@ -216,7 +216,7 @@ class DVD(Medias, Empruntable):
         return self.__duree_minutes
 
     def afficher_media(self):
-        if self.__disponible:
+        if self.disponible:
             i = "Ce DVD est disponible"
         else:
             i = "Ce DVD n'est pas disponible"
@@ -266,7 +266,7 @@ class CD(Medias, Empruntable):
         return self.__nombre_pistes
 
     def afficher_media(self):
-        if self.__disponible:
+        if self.disponible:
             i = "Ce CD est disponible"
         else:
             i = "Ce CD n'est pas disponible"
