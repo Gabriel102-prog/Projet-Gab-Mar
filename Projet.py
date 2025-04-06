@@ -417,33 +417,33 @@ while True:
 
         if critere_recherche == "1":
             titre_recherche = input("Entrez le titre du média : ").lower()
-            for media in mediatheque._Mediatheque__medias:
+            for media in mediatheque.medias:
                 if titre_recherche in media.titre.lower():
                     print(media.afficher_media())
 
         elif critere_recherche == "2":
             genre_recherche = input("Entrez le genre du média : ").lower()
-            for media in mediatheque.Mediatheque__medias:
+            for media in mediatheque.medias:
                 if genre_recherche in media.genre.lower():
                     print(media.afficher_media())
 
         elif critere_recherche == "3":
             annee_recherche = input("Entrez l'année de parution du média : ")
-            for media in mediatheque._Mediatheque__medias:
+            for media in mediatheque.medias:
                 if str(media.annee_parution) == annee_recherche:
                     print(media.afficher_media())
 
         elif critere_recherche == "4":
             dispo_recherche = input("Le média est-il disponible ? (oui/non) : ").lower()
             dispo_bool = dispo_recherche == "oui"
-            for media in mediatheque._Mediatheque__medias:
+            for media in mediatheque.medias:
                 if media.disponible == dispo_bool:
                     print(media.afficher_media())
     elif choix_action == "3":
         identifiant_media = input("Entrez l'identifiant du média : ").strip()
         media_trouve = False
 
-        for media in mediatheque._Mediatheque__medias:
+        for media in mediatheque.medias:
             if media.identifiant == identifiant_media:
                 print(media.afficher_media())
                 media_trouve = True
@@ -471,7 +471,12 @@ while True:
     elif choix_action == "7":
         pass
     elif choix_action == "8":
-        pass
+        nombre_livres = sum(1 for media in mediatheque.medias if isinstance(media, Livre))
+        print(f"Il y a actuellement {nombre_livres} livre(s) dans la médiathèque.")
+        nombre_livres = sum(1 for media in mediatheque.medias if isinstance(media, DVD))
+        print(f"Il y a actuellement {nombre_livres} livre(s) dans la médiathèque.")
+        nombre_livres = sum(1 for media in mediatheque.medias if isinstance(media, CD))
+        print(f"Il y a actuellement {nombre_livres} livre(s) dans la médiathèque.")
     elif choix_action == "9":
         mediatheque.afficher_tous_utilisateurs()
     elif choix_action == "10":
