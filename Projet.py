@@ -25,7 +25,8 @@ class Mediatheque:
         self.__total_emprunts = 0
         self.__total_retours = 0
 
-    def get_medias(self):
+    @property
+    def medias(self):
         return self.__medias
 
     def ajouter_utilisateur(self, nouveau_utilisateur):
@@ -44,16 +45,6 @@ class Mediatheque:
                 print(self.__utilisateurs[i])
         else:
             print("Aucun utilisateur n'est enregistré.")
-
-    # TODO possible de réutiliser
-    # def afficher_utilisateurs(self):
-    #     """Méthode pour afficher tous les utilisateurs de la médiathèque"""
-    #     if self.__utilisateurs:
-    #         print("Liste des utilisateurs :")
-    #         for utilisateur in self.__utilisateurs:
-    #             print(f"{utilisateur.identifiant}: {utilisateur.nom} {utilisateur.prenom}")
-    #     else:
-    #         print("Aucun utilisateur enregistré.")
 
 
 class Empruntable(ABC):
@@ -85,9 +76,17 @@ class Medias(ABC):
     def date_emprunt(self):
         return self.__date_emprunt
 
+    @date_emprunt.setter
+    def date_emprunt(self, date_emprunt_2):
+        self.__date_emprunt = date_emprunt_2
+
     @property
     def date_retour(self):
         return self.__date_retour
+
+    @date_retour.setter
+    def date_retour(self, date_retour_2):
+        self.__date_retour = date_retour_2
 
     @property
     def identifiant(self):
@@ -159,7 +158,7 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
         return self.__auteur
 
     def afficher_media(self):
-        if Livre.disponible:
+        if self.__disponible:
             i = "Ce Livre est disponible"
         else:
             i = "Ce Livre n'est pas disponible"
