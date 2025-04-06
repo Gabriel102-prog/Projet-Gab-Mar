@@ -76,7 +76,6 @@ class Medias(ABC):
         self.__annee_parution = annee_parution
         self.__genre = genre
         self.__disponible = disponible
-        self.__date_retour = datetime.now
         self.__date_emprunt = date_emprunt
         self.__date_retour = date_retour
 
@@ -217,7 +216,7 @@ class DVD(Medias, Empruntable):
         return self.__duree_minutes
 
     def afficher_media(self):
-        if self.disponible:
+        if self.__disponible:
             i = "Ce DVD est disponible"
         else:
             i = "Ce DVD n'est pas disponible"
@@ -267,7 +266,7 @@ class CD(Medias, Empruntable):
         return self.__nombre_pistes
 
     def afficher_media(self):
-        if self.disponible:
+        if self.__disponible:
             i = "Ce CD est disponible"
         else:
             i = "Ce CD n'est pas disponible"
