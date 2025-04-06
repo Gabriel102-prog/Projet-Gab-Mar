@@ -217,7 +217,7 @@ class DVD(Medias, Empruntable):
         return self.__duree_minutes
 
     def afficher_media(self):
-        if DVD.disponible:
+        if self.disponible:
             i = "Ce DVD est disponible"
         else:
             i = "Ce DVD n'est pas disponible"
@@ -267,7 +267,7 @@ class CD(Medias, Empruntable):
         return self.__nombre_pistes
 
     def afficher_media(self):
-        if CD.disponible:
+        if self.disponible:
             i = "Ce CD est disponible"
         else:
             i = "Ce CD n'est pas disponible"
