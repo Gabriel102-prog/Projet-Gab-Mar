@@ -1,5 +1,5 @@
 import unittest
-from mediatheque import Mediatheque, Livre, DVD, CD, Utilisateur
+from brouillon import Mediatheque, Livre, DVD, CD, Utilisateur
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
