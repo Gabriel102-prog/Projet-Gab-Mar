@@ -26,6 +26,10 @@ class Mediatheque:
         self.__total_retours = 0
 
     @property
+    def utilisateurs(self):
+        return self.__utilisateurs
+
+    @property
     def medias(self):
         return self.__medias
 
@@ -38,6 +42,7 @@ class Mediatheque:
     def total_retours(self):
         """Retourne le nombre total de retours"""
         return self.__total_retours
+
     def ajouter_utilisateur(self, nouveau_utilisateur):
         """Méthode pour ajouter un article à la liste"""
         self.__utilisateurs.append(nouveau_utilisateur)
@@ -50,14 +55,15 @@ class Mediatheque:
         if len(self.__utilisateurs) > 0:
             print("Liste des utilisateurs :")
             print("nom       prénom")
-            for i in range(len(self.__utilisateurs)):
-                print(self.__utilisateurs[i])
+            for e in range(len(self.__utilisateurs)):
+                print(self.__utilisateurs[e])
         else:
             print("Aucun utilisateur n'est enregistré.")
+
     def afficher_nombres_utilisateurs(self):
         nombres_utilisateur = 0
         if len(self.__utilisateurs) > 0:
-            for i in range(len(self.__utilisateurs)):
+            for _ in range(len(self.__utilisateurs)):
                 nombres_utilisateur += 1
             print(f"Il y a {nombres_utilisateur} utilisateurs enregistré.")
         else:
@@ -156,13 +162,10 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
         return self.date_emprunt + timedelta(days=21)
 
     def emprunter(self):
-        if self.disponible:
-            self.disponible = False
-            self.date_emprunt = datetime.now()
-            print(
-                f"Le Livre est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
-        else:
-            print("Le Livre que vous voulez emprunter est actuellement indisponible.")
+        self.disponible = False
+        self.date_emprunt = datetime.now()
+        print(
+            f"Le Livre est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
 
     def retourner(self):
         self.disponible = True
@@ -185,12 +188,12 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
 
     def afficher_media(self):
         if self.disponible:
-            i = "Ce Livre est disponible"
+            v = "Ce Livre est disponible"
         else:
-            i = "Ce Livre n'est pas disponible"
+            v = "Ce Livre n'est pas disponible"
         return (f"Livre: {self.titre}, Auteur: {self.auteur}, Genre: {self.genre},\n"
                 f"Nombre pages: {self.nombre_pages}, Année de parution: {self.annee_parution}, "
-                f"Identifiant: {self.identifiant}, Disponibilité: {i}")
+                f"Identifiant: {self.identifiant}, Disponibilité: {v}")
 
 
 class DVD(Medias, Empruntable):
@@ -206,13 +209,10 @@ class DVD(Medias, Empruntable):
         return self.date_emprunt + timedelta(days=14)
 
     def emprunter(self):
-        if self.disponible:
-            self.disponible = False
-            self.date_emprunt = datetime.now()
-            print(
-                f"Le DVD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
-        else:
-            print("Le DVD que vous voulez emprunter est actuellement indisponible.")
+        self.disponible = False
+        self.date_emprunt = datetime.now()
+        print(
+            f"Le DVD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
 
     def retourner(self):
         self.disponible = True
@@ -235,12 +235,12 @@ class DVD(Medias, Empruntable):
 
     def afficher_media(self):
         if self.disponible:
-            i = "Ce DVD est disponible"
+            v = "Ce DVD est disponible"
         else:
-            i = "Ce DVD n'est pas disponible"
+            v = "Ce DVD n'est pas disponible"
         return (f"DVD: {self.titre}, Réalisateur: {self.realisateur}, Genre: {self.genre},\n"
                 f"Durée: {self.duree_minutes}, Année de parution:{self.annee_parution}, "
-                f"Identifiant: {self.identifiant}, Disponiblité: {i}")
+                f"Identifiant: {self.identifiant}, Disponiblité: {v}")
 
 
 class CD(Medias, Empruntable):
@@ -256,13 +256,10 @@ class CD(Medias, Empruntable):
         return self.date_emprunt + timedelta(days=14)
 
     def emprunter(self):
-        if self.disponible:
-            self.disponible = False
-            self.date_emprunt = datetime.now()
-            print(
-                f"Le CD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
-        else:
-            print("Le CD que vous voulez emprunter est actuellement indisponible.")
+        self.disponible = False
+        self.date_emprunt = datetime.now()
+        print(
+            f"Le CD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
 
     def retourner(self):
         self.disponible = True
@@ -285,12 +282,12 @@ class CD(Medias, Empruntable):
 
     def afficher_media(self):
         if self.disponible:
-            i = "Ce CD est disponible"
+            v = "Ce CD est disponible"
         else:
-            i = "Ce CD n'est pas disponible"
+            v = "Ce CD n'est pas disponible"
         return (f"CD: {self.titre}, Artiste: {self.artiste}, Genre: {self.genre},\n"
                 f"Nombre de pistes: {self.nombre_pistes}, Année de parution:{self.annee_parution}, "
-                f"Identifiant: {self.identifiant}, Disponibilité: {i}")
+                f"Identifiant: {self.identifiant}, Disponibilité: {v}")
 
 
 class Utilisateur:
@@ -354,6 +351,60 @@ def cree_identifiant_cd(x):
 
 
 mediatheque = Mediatheque()
+
+
+def checher_media_selon_caracteristique():
+    while True:
+        liste_media = []
+        print("Choisissez un critère de recherche :")
+        print("1. Par titre")
+        print("2. Par genre")
+        print("3. Par année")
+        print("4. Par disponibilité")
+        w = 0
+        critere_recherche = input(">").strip()
+        if critere_recherche == "1":
+            titre_recherche = input("Entrez le titre du média : ").lower()
+            for y in mediatheque.medias:
+                if titre_recherche in y.titre.lower():
+                    w += 1
+                    print(f"{w}e média trouvé")
+                    print(y.afficher_media())
+                    liste_media.append(y)
+
+        elif critere_recherche == "2":
+            genre_recherche = input("Entrez le genre du média : ").lower()
+            for y in mediatheque.medias:
+                if genre_recherche in y.genre.lower():
+                    w += 1
+                    print(f"{w}e média trouvé")
+                    print(y.afficher_media())
+                    liste_media.append(y)
+        elif critere_recherche == "3":
+            annee_recherche = input("Entrez l'année de parution du média : ")
+            for y in mediatheque.medias:
+                if str(y.annee_parution) == annee_recherche:
+                    w += 1
+                    print(f"{w}e média trouvé")
+                    print(y.afficher_media())
+                    liste_media.append(y)
+
+        elif critere_recherche == "4":
+            dispo_recherche = input("Le média est-il disponible ? (oui/non) : ").lower()
+            dispo_bool = dispo_recherche == "oui"
+            for y in mediatheque.medias:
+                if y.disponible == dispo_bool:
+                    w += 1
+                    print(f"{w}e média trouvé")
+                    print(y.afficher_media())
+                    liste_media.append(y)
+        if liste_media:
+            return liste_media
+        else:
+            print("Choix invalide, entrez une chiffre de 1 à 4")
+            continue
+
+
 while True:
     print(
         "\n  Veuillez entrer le numéro de l'option souhaitée\n "
@@ -426,37 +477,7 @@ while True:
                               "1 et 3", "red"))
 
     elif choix_action == "2":
-        print("Choisissez un critère de recherche :")
-        print("1. Par titre")
-        print("2. Par genre")
-        print("3. Par année")
-        print("4. Par disponibilité")
-        critere_recherche = input(">").strip()
-
-        if critere_recherche == "1":
-            titre_recherche = input("Entrez le titre du média : ").lower()
-            for media in mediatheque.medias:
-                if titre_recherche in media.titre.lower():
-                    print(media.afficher_media())
-
-        elif critere_recherche == "2":
-            genre_recherche = input("Entrez le genre du média : ").lower()
-            for media in mediatheque.medias:
-                if genre_recherche in media.genre.lower():
-                    print(media.afficher_media())
-
-        elif critere_recherche == "3":
-            annee_recherche = input("Entrez l'année de parution du média : ")
-            for media in mediatheque.medias:
-                if str(media.annee_parution) == annee_recherche:
-                    print(media.afficher_media())
-
-        elif critere_recherche == "4":
-            dispo_recherche = input("Le média est-il disponible ? (oui/non) : ").lower()
-            dispo_bool = dispo_recherche == "oui"
-            for media in mediatheque.medias:
-                if media.disponible == dispo_bool:
-                    print(media.afficher_media())
+        checher_media_selon_caracteristique()
     elif choix_action == "3":
         identifiant_media = input("Entrez l'identifiant du média : ").strip()
         media_trouve = False
@@ -480,11 +501,38 @@ while True:
         # Class
         utilisateur = Utilisateur(identifiant_identification, nom_identification, prenom_identification,
                                   email_identification,
-                                  {"Médias empruntés": None, "Médias retournés": None, "Frais de retard total": None, })
+                                  {"Médias empruntés": [], "Médias retournés": [], "Frais de retard total": 0, })
         mediatheque.ajouter_utilisateur(utilisateur)
         print(f"Votre identifiant est {identifiant_identification}")
     elif choix_action == "5":
-        pass
+        while True:
+            identifiant_emprunt = input("Qu'elle est votre identifiant? :")
+            utilisateur_emprunt = None
+            for i in mediatheque.utilisateurs:
+                if i.identifiant == identifiant_emprunt:
+                    utilisateur_emprunt = i
+                    break
+            if utilisateur_emprunt is None:
+                print("L'identifiant entré n'est pas reconnu dans la base de donnée")
+            else:
+                liste_media = checher_media_selon_caracteristique()
+                if len(liste_media) == 0:
+                    print("Aucun média trouvé")
+                else:
+                    while True:
+                        choix_media = int(
+                            input("Quel média voulez vous emprunter ? (le premier :1, deuxième: 2, etc.)"))
+                        if choix_media not in [i + 1 for i in range(len(liste_media))]:
+                            print("option invalide veuillez recommencer")
+                            continue
+                        media_choisi = liste_media[choix_media - 1]
+                        if not media_choisi.disponible:
+                            print("Le média que vous voulez emprunter est actuellement indisponible.")
+                            break
+                        else:
+                            media_choisi.emprunter()
+                            utilisateur_emprunt.historique["Médias empruntés"].append(media_choisi)
+
     elif choix_action == "6":
         pass
     elif choix_action == "7":
@@ -510,4 +558,5 @@ while True:
     elif choix_action == "10":
         mediatheque.afficher_tous_medias()
     else:
-        print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
+        print(
+            colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
