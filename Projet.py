@@ -470,3 +470,4 @@ while True:
     else:
         print(
             colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
+# test
