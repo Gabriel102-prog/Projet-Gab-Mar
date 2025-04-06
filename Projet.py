@@ -168,7 +168,7 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
                 f"Identifiant: {self.identifiant}, Disponibilité: {i}")
 
 
-class DVD(Medias):
+class DVD(Medias, Empruntable):
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, realisateur, duree_minutes, date_retour,
                  date_emprunt):
         super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt)
@@ -217,7 +217,7 @@ class DVD(Medias):
                 f"Identifiant: {self.identifiant}, Disponiblité: {i}")
 
 
-class CD(Medias):
+class CD(Medias, Empruntable):
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, artiste, nombre_pistes, date_retour,
                  date_emprunt):
         super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt)
