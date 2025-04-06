@@ -521,7 +521,7 @@ while True:
                 else:
                     while True:
                         choix_media = int(
-                            input("Quel média voulez vous emprunter ? (le premier :1, deuxième: 2, etc.)"))
+                            input("Quel média voulez vous emprunter ? (le premier :1, deuxième: 2, etc.):"))
                         if choix_media not in [i + 1 for i in range(len(liste_media))]:
                             print("option invalide veuillez recommencer")
                             continue
@@ -532,6 +532,7 @@ while True:
                         else:
                             media_choisi.emprunter()
                             utilisateur_emprunt.historique["Médias empruntés"].append(media_choisi)
+                            break
 
     elif choix_action == "6":
         pass
