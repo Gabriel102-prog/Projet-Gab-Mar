@@ -1,9 +1,13 @@
+import locale
+
 from termcolor import colored
 import os
 from datetime import datetime, timedelta
 
 os.environ["FORCE_COLOR"] = "1"
 from abc import ABC, abstractmethod
+
+locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
 # Projet 1 / Gabriel Bertrand et Marius Séguin / 2025-03-21
 # Système de Gestion de Médiathèque
@@ -165,7 +169,7 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
         self.disponible = False
         self.date_emprunt = datetime.now()
         print(
-            f"Le Livre est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
+            f"Le Livre est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day} {self.date_retour_max.strftime("%B")} {self.date_retour_max.year}")
 
     def retourner(self):
         self.disponible = True
@@ -212,7 +216,7 @@ class DVD(Medias, Empruntable):
         self.disponible = False
         self.date_emprunt = datetime.now()
         print(
-            f"Le DVD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
+            f"Le DVD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day} {self.date_retour_max.strftime("%B")} {self.date_retour_max.year}")
 
     def retourner(self):
         self.disponible = True
@@ -259,7 +263,7 @@ class CD(Medias, Empruntable):
         self.disponible = False
         self.date_emprunt = datetime.now()
         print(
-            f"Le CD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
+            f"Le CD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day} {self.date_retour_max.strftime("%B")} {self.date_retour_max.year}")
 
     def retourner(self):
         self.disponible = True
@@ -514,6 +518,7 @@ while True:
                     break
             if utilisateur_emprunt is None:
                 print("L'identifiant entré n'est pas reconnu dans la base de donnée")
+                break
             else:
                 liste_media = checher_media_selon_caracteristique()
                 if len(liste_media) == 0:
