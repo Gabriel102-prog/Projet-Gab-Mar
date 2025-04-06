@@ -29,6 +29,15 @@ class Mediatheque:
     def medias(self):
         return self.__medias
 
+    @property
+    def total_emprunts(self):
+        """Retourne le nombre total d'emprunts"""
+        return self.__total_emprunts
+
+    @property
+    def total_retours(self):
+        """Retourne le nombre total de retours"""
+        return self.__total_retours
     def ajouter_utilisateur(self, nouveau_utilisateur):
         """Méthode pour ajouter un article à la liste"""
         self.__utilisateurs.append(nouveau_utilisateur)
@@ -45,6 +54,14 @@ class Mediatheque:
                 print(self.__utilisateurs[i])
         else:
             print("Aucun utilisateur n'est enregistré.")
+    def afficher_nombres_utilisateurs(self):
+        nombres_utilisateur = 0
+        if len(self.__utilisateurs) > 0:
+            for i in range(len(self.__utilisateurs)):
+                nombres_utilisateur += 1
+            print(f"Il y a {nombres_utilisateur} utilisateurs enregistré.")
+        else:
+            print("Il n'y a aucun utilisateur enregistré.")
 
     def afficher_tous_medias(self):
         """Méthode pour afficher tous les médias"""
@@ -472,17 +489,25 @@ while True:
     elif choix_action == "7":
         pass
     elif choix_action == "8":
+        print("Medias".center(60, "*"))
         nombre_livres = sum(1 for media in mediatheque.medias if isinstance(media, Livre))
-        print(f"Il y a actuellement {nombre_livres} livre(s) dans la médiathèque.")
-        nombre_livres = sum(1 for media in mediatheque.medias if isinstance(media, DVD))
-        print(f"Il y a actuellement {nombre_livres} livre(s) dans la médiathèque.")
-        nombre_livres = sum(1 for media in mediatheque.medias if isinstance(media, CD))
-        print(f"Il y a actuellement {nombre_livres} livre(s) dans la médiathèque.")
+        print(f"Il y a actuellement dans la médiathèque:\n- {nombre_livres} livre(s)")
+        nombre_dvd = sum(1 for media in mediatheque.medias if isinstance(media, DVD))
+        print(f"- {nombre_dvd} DVD(s)")
+        nombre_cd = sum(1 for media in mediatheque.medias if isinstance(media, CD))
+        print(f"- {nombre_cd} CD(s)1")
+        total_medias = (nombre_livres + nombre_cd + nombre_dvd)
+        print(f"Total des médias = {total_medias} ")
+        print("Utilisateur".center(60, "*"))
+        mediatheque.afficher_nombres_utilisateurs()
+        print("Emprunt et retour".center(60, "*"))
+        print(f"Il y a eu au total:\n- {mediatheque.total_emprunts} emprunts ")
+        print(f"- {mediatheque.total_retours} retours ")
+
     elif choix_action == "9":
         mediatheque.afficher_tous_utilisateurs()
     elif choix_action == "10":
         mediatheque.afficher_tous_medias()
     else:
-        print(
-            colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
+        print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre 0 et 10", "red"))
 
