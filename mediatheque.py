@@ -372,40 +372,51 @@ def checher_media_selon_caracteristique():
             for y in mediatheque.medias:
                 if titre_recherche in y.titre.lower():
                     w += 1
-                    print(f"{w}e média trouvé")
+                    print(colored(f"{w}e média trouvé", "yellow"))
                     print(y.afficher_media())
                     liste_media.append(y)
 
+            if w == 0:
+                print(colored("Aucun média trouvé avec ce titre.", "blue"))
+            break
         elif critere_recherche == "2":
             genre_recherche = input("Entrez le genre du média : ").lower()
             for y in mediatheque.medias:
                 if genre_recherche in y.genre.lower():
                     w += 1
-                    print(f"{w}e média trouvé")
+                    print(colored(f"{w}e média trouvé", "yellow"))
                     print(y.afficher_media())
                     liste_media.append(y)
+            if w == 0:
+                print(colored("Aucun média trouvé avec ce titre.", "blue"))
+            break
         elif critere_recherche == "3":
             annee_recherche = input("Entrez l'année de parution du média : ")
             for y in mediatheque.medias:
                 if str(y.annee_parution) == annee_recherche:
                     w += 1
-                    print(f"{w}e média trouvé")
+                    print(colored(f"{w}e média trouvé", "yellow"))
                     print(y.afficher_media())
                     liste_media.append(y)
-
+            if w == 0:
+                print(colored("Aucun média trouvé avec ce titre.", "blue"))
+            break
         elif critere_recherche == "4":
             dispo_recherche = input("Le média est-il disponible ? (oui/non) : ").lower()
             dispo_bool = dispo_recherche == "oui"
             for y in mediatheque.medias:
                 if y.disponible == dispo_bool:
                     w += 1
-                    print(f"{w}e média trouvé")
+                    print(colored(f"{w}e média trouvé", "yellow"))
                     print(y.afficher_media())
                     liste_media.append(y)
+            if w == 0:
+                print(colored("Aucun média trouvé avec ce titre.", "blue"))
+            break
         if liste_media:
             return liste_media
         else:
-            print("Choix invalide, entrez une chiffre de 1 à 4")
+            print(colored("Choix invalide, entrez une chiffre de 1 à 4", "red"))
             continue
 
 
