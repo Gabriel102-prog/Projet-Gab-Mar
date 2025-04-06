@@ -27,6 +27,7 @@ class Mediatheque:
 
     def get_medias(self):
         return self.__medias
+
     def ajouter_utilisateur(self, nouveau_utilisateur):
         """Méthode pour ajouter un article à la liste"""
         self.__utilisateurs.append(nouveau_utilisateur)
@@ -124,7 +125,6 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
                          date_emprunt)
         self.__auteur = auteur
         self.__nombre_pages = nombre_pages
-        self.__date_emprunt = date_emprunt
 
     @property
     def date_retour_max(self):
@@ -174,7 +174,6 @@ class DVD(Medias):
         super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt)
         self.__realisateur = realisateur
         self.__duree_minutes = duree_minutes
-        self.__date_emprunt = date_emprunt
 
     @property
     def date_retour_max(self):
@@ -224,7 +223,6 @@ class CD(Medias):
         super().__init__(identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt)
         self.__artiste = artiste
         self.__nombre_pistes = nombre_pistes
-        self.__date_emprunt = date_emprunt
 
     @property
     def date_retour_max(self):
@@ -295,7 +293,6 @@ class Utilisateur:
     @property
     def historique(self):
         return self.__historique
-
 
     def __str__(self):
         return f"{self.nom}, {self.prenom}"
@@ -417,7 +414,7 @@ while True:
 
         elif critere_recherche == "2":
             genre_recherche = input("Entrez le genre du média : ").lower()
-            for media in mediatheque._Mediatheque__medias:
+            for media in mediatheque.Mediatheque__medias:
                 if genre_recherche in media.genre.lower():
                     print(media.afficher_media())
 
