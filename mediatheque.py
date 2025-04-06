@@ -446,7 +446,7 @@ while True:
                               genre_identification, True, auteur_identification, nombre_pages_identification,
                               None, None)
                 mediatheque.ajouter_medias(livre)
-                print(f"L'identifiant du livre est maintenant :{identifiant_identification}")
+                print(colored(f"L'identifiant du livre est maintenant :{identifiant_identification}", "blue"))
                 break
             elif sorte_media == "2":
                 identifiant_identification = cree_identifiant_dvd(nombre_dvd)
@@ -460,7 +460,7 @@ while True:
                           genre_identification, True, realisateur_identification, duree_minutes_identification
                           , None, None)
                 mediatheque.ajouter_medias(dvd)
-                print(f"L'identifiant du DVD est maintenant :{identifiant_identification}")
+                print(colored(f"L'identifiant du DVD est maintenant :{identifiant_identification}", "blue"))
                 break
             elif sorte_media == "3":
                 identifiant_identification = cree_identifiant_cd(nombre_cd)
@@ -474,7 +474,7 @@ while True:
                         genre_identification, True, artiste_identification, nombre_pistes_identification,
                         None, None)
                 mediatheque.ajouter_medias(cd)
-                print(f"L'identifiant du CD est maintenant :{identifiant_identification}")
+                print(colored(f"L'identifiant du CD est maintenant :{identifiant_identification}", "blue"))
                 break
             else:
                 print(colored("Vous avez entrer un choix inexistant ou invalide.Veuillez entrez un nombre entre "
@@ -507,7 +507,7 @@ while True:
                                   email_identification,
                                   {"Médias empruntés": [], "Médias retournés": [], "Frais de retard total": 0, })
         mediatheque.ajouter_utilisateur(utilisateur)
-        print(f"Votre identifiant est {identifiant_identification}")
+        print(colored(f"Votre identifiant est {identifiant_identification}", "blue"))
     elif choix_action == "5":
         while True:
             identifiant_emprunt = input("Qu'elle est votre identifiant? :")
@@ -517,22 +517,22 @@ while True:
                     utilisateur_emprunt = i
                     break
             if utilisateur_emprunt is None:
-                print("L'identifiant entré n'est pas reconnu dans la base de donnée")
+                print(colored("L'identifiant entré n'est pas reconnu dans la base de donnée", "red"))
                 break
             else:
                 liste_media = checher_media_selon_caracteristique()
                 if len(liste_media) == 0:
-                    print("Aucun média trouvé")
+                    print(colored("Aucun média trouvé", "red"))
                 else:
                     while True:
                         choix_media = int(
                             input("Quel média voulez vous emprunter ? (le premier :1, deuxième: 2, etc.):"))
                         if choix_media not in [i + 1 for i in range(len(liste_media))]:
-                            print("option invalide veuillez recommencer")
+                            print(colored("option invalide veuillez recommencer", "red"))
                             continue
                         media_choisi = liste_media[choix_media - 1]
                         if not media_choisi.disponible:
-                            print("Le média que vous voulez emprunter est actuellement indisponible.")
+                            print(colored("Le média que vous voulez emprunter est actuellement indisponible.", "blue"))
                             break
                         else:
                             media_choisi.emprunter()
