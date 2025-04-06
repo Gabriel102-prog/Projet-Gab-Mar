@@ -134,7 +134,8 @@ class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
         if self.__disponible:
             self.__disponible = False
             self.__date_emprunt = datetime.now()
-            print("Le Livre est disponible, vous l'avez emprunté.")
+            print(
+                f"Le Livre est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
         else:
             print("Le Livre que vous voulez emprunter est actuellement indisponible.")
 
@@ -183,7 +184,8 @@ class DVD(Medias, Empruntable):
         if self.__disponible:
             self.__disponible = False
             self.__date_emprunt = datetime.now()
-            print("Le DVD est disponible, vous l'avez emprunté.")
+            print(
+                f"Le DVD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
         else:
             print("Le DVD que vous voulez emprunter est actuellement indisponible.")
 
@@ -232,7 +234,8 @@ class CD(Medias, Empruntable):
         if self.__disponible:
             self.__disponible = False
             self.__date_emprunt = datetime.now()
-            print("Le CD est disponible, vous l'avez emprunté.")
+            print(
+                f"Le CD est disponible, vous l'avez emprunté.\nLa date limite de retour est le {self.date_retour_max.day}{self.date_retour_max.month}{self.date_retour_max.year}")
         else:
             print("Le CD que vous voulez emprunter est actuellement indisponible.")
 
