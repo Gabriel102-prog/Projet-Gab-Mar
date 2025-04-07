@@ -253,10 +253,11 @@ while True:
                 liste_emprunt = utilisateur_retour.historique["Médias empruntés"]
                 if len(liste_emprunt) == 0:
                     print(colored("Aucun média emprunté", "red"))
+                    break
                 else:
                     while True:
                         q = 0
-                        for p in liste_emprunt:
+                        for p in range(len(liste_emprunt)):
                             q += 1
                             print(f"{q}e emprunt :{liste_emprunt[p]}")
                         choix_emprunt = int(
