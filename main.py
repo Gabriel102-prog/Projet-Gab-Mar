@@ -1,5 +1,6 @@
 from termcolor import colored
 import os
+
 os.environ["FORCE_COLOR"] = "1"
 from models.Livre import Livre
 from models.DVD import DVD
@@ -15,23 +16,23 @@ nombre_dvd = 0
 nombre_cd = 0
 
 
-def cree_identifiant(x):  # Todo commenter pouir dire utilisateur
-    nombre = x + 1
+def cree_identifiant(u):  # Todo commenter pouir dire utilisateur
+    nombre = u + 1
     return f"U{str(nombre).zfill(8)}"
 
 
-def cree_identifiant_livre(x):
-    nombre = x + 1
+def cree_identifiant_livre(d):
+    nombre = d + 1
     return f"L{str(nombre).zfill(8)}"
 
 
-def cree_identifiant_dvd(x):
-    nombre = x + 1
+def cree_identifiant_dvd(f):
+    nombre = f + 1
     return f"D{str(nombre).zfill(8)}"
 
 
-def cree_identifiant_cd(x):
-    nombre = x + 1
+def cree_identifiant_cd(e):
+    nombre = e + 1
     return f"C{str(nombre).zfill(8)}"
 
 
@@ -96,7 +97,7 @@ def checher_media_selon_caracteristique():
             if w == 0:
                 print(colored("Aucun média trouvé avec ce titre.", "blue"))
             break
-        if liste_media:
+        if w == 1:
             return liste_media
         else:
             print(colored("Choix invalide, entrez une chiffre de 1 à 4", "red"))
@@ -221,7 +222,7 @@ while True:
                     while True:
                         choix_media = int(
                             input("Quel média voulez vous emprunter ? (le premier :1, deuxième: 2, etc.):"))
-                        if choix_media not in range(1, mediatheque.calculer_nombre_medias() + 1):
+                        if choix_media < 1 or len(liste_media) < choix_media:
                             print(colored("option invalide veuillez recommencer", "red"))
                             continue
                         media_choisi = liste_media[choix_media - 1]
@@ -258,7 +259,7 @@ while True:
                             print(f"{q}e emprunt :{liste_emprunt[p]}")
                         choix_emprunt = int(
                             input("Quel média voulez vous retourner ? (le premier :1, deuxième: 2, etc.):"))
-                        if choix_emprunt not in [i + 1 for i in range(len(liste_emprunt))]:
+                        if choix_emprunt < 1 or len(liste_emprunt) < choix_emprunt:
                             print(colored("option invalide veuillez recommencer", "red"))
                             continue
                         mediatheque.total_retours += 1
