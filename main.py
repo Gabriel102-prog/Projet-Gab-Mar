@@ -258,7 +258,7 @@ while True:
                         q = 0
                         for p in range(len(liste_emprunt)):
                             q += 1
-                            print(f"{q}e emprunt :{liste_emprunt[p]}")
+                            print(f"{q}e emprunt :{liste_emprunt[p].afficher_media()}")
                         choix_emprunt = int(
                             input("Quel média voulez vous retourner ? (le premier :1, deuxième: 2, etc.):"))
                         if choix_emprunt < 1 or len(liste_emprunt) < choix_emprunt:
@@ -271,6 +271,7 @@ while True:
                         utilisateur_retour.historique["Médias retournés"].append(media_choisi)
                         utilisateur_retour.historique["Frais de retard total"] += frais_retard
                         break
+                    break
     elif choix_action == "7":
         while True:
             identifiant_historique = input("Quel est votre identifiant? :")
