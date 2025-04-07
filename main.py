@@ -239,6 +239,7 @@ while True:
                             break
 
     elif choix_action == "6":
+
         while True:
             identifiant_retour = input("Qu'elle est votre identifiant? :")
             utilisateur_retour = None
