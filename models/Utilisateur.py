@@ -32,6 +32,10 @@ class Utilisateur:
     def historique(self):
         return self.__historique
 
+    @historique.setter
+    def historique(self, value):
+        self.__historique = value
+
     # Méthode pour afficher l'utilisateur sous une forme plus lisible
     def __str__(self):
         # Retourne une chaîne de caractères formatée avec le nom et prénom de l'utilisateur
