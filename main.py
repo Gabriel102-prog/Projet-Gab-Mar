@@ -1,5 +1,4 @@
 import locale
-
 from termcolor import colored
 import os
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
