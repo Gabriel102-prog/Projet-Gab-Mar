@@ -1,6 +1,8 @@
+import locale
+
 from termcolor import colored
 import os
-
+locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 os.environ["FORCE_COLOR"] = "1"
 from models.Livre import Livre
 from models.DVD import DVD
@@ -40,8 +42,8 @@ mediatheque = Mediatheque()
 
 
 def checher_media_selon_caracteristique():
+    liste_media = []
     while True:
-        liste_media = []
         print("Choisissez un critère de recherche :")
         print("1. Par titre")
         print("2. Par genre")
@@ -97,11 +99,10 @@ def checher_media_selon_caracteristique():
             if w == 0:
                 print(colored("Aucun média trouvé avec ce titre.", "blue"))
             break
-        if w == 1:
-            return liste_media
         else:
             print(colored("Choix invalide, entrez une chiffre de 1 à 4", "red"))
             continue
+    return liste_media
 
 
 while True:
@@ -132,11 +133,11 @@ while True:
             if sorte_media == "1":
                 identifiant_identification = cree_identifiant_livre(nombre_livre)
                 nombre_livre += 1
-                titre_identification = input("Qu'elle est le titre du livre? :")
-                annee_parution_identification = input("Qu'elle est l'année de parution du livre? :")
-                genre_identification = input("Qu'elle est le genre du livre? :")
-                auteur_identification = input("Qu'elle est l'auteur du livre? :")
-                nombre_pages_identification = input("Qu'elle est le nombre de pages du livre? :")
+                titre_identification = input("Quel est le titre du livre? :")
+                annee_parution_identification = input("Quel est l'année de parution du livre? :")
+                genre_identification = input("Quel est le genre du livre? :")
+                auteur_identification = input("Quel est l'auteur du livre? :")
+                nombre_pages_identification = input("Quel est le nombre de pages du livre? :")
                 livre = Livre(identifiant_identification, titre_identification, annee_parution_identification,
                               genre_identification, True, auteur_identification, nombre_pages_identification,
                               None, None)
@@ -146,11 +147,11 @@ while True:
             elif sorte_media == "2":
                 identifiant_identification = cree_identifiant_dvd(nombre_dvd)
                 nombre_dvd += 1
-                titre_identification = input("Qu'elle est le titre du DVD? :")
-                annee_parution_identification = input("Qu'elle est l'année de parution du DVD? :")
-                genre_identification = input("Qu'elle est le genre du DVD? :")
+                titre_identification = input("Quel est le titre du DVD? :")
+                annee_parution_identification = input("Quel est l'année de parution du DVD? :")
+                genre_identification = input("Quel est le genre du DVD? :")
                 realisateur_identification = input("Qui est le réalisateur du DVD? :")
-                duree_minutes_identification = input("Qu'elle est la durée du DVD? :")
+                duree_minutes_identification = input("Quel est la durée du DVD? :")
                 dvd = DVD(identifiant_identification, titre_identification, annee_parution_identification,
                           genre_identification, True, realisateur_identification, duree_minutes_identification
                           , None, None)
@@ -160,9 +161,9 @@ while True:
             elif sorte_media == "3":
                 identifiant_identification = cree_identifiant_cd(nombre_cd)
                 nombre_cd += 1
-                titre_identification = input("Qu'elle est le titre du CD? :")
-                annee_parution_identification = input("Qu'elle est l'année de parution du CD? :")
-                genre_identification = input("Qu'elle est le genre du CD? :")
+                titre_identification = input("Quel est le titre du CD? :")
+                annee_parution_identification = input("Quel est l'année de parution du CD? :")
+                genre_identification = input("Quel est le genre du CD? :")
                 artiste_identification = input("Qui est l'artiste de ce CD? :")
                 nombre_pistes_identification = input("Combien de piste à ce CD? :")
                 cd = CD(identifiant_identification, titre_identification, annee_parution_identification,
@@ -194,9 +195,9 @@ while True:
         # Entrée
         identifiant_identification = cree_identifiant(nombre_utilisateur)
         nombre_utilisateur += 1
-        nom_identification = input("Qu'elle est votre nom? :")
-        prenom_identification = input("Qu'elle est votre prenom? :")
-        email_identification = input("Qu'elle est votre email? :")
+        nom_identification = input("Quel est votre nom? :")
+        prenom_identification = input("Quel est votre prenom? :")
+        email_identification = input("Quel est votre email? :")
         # Class
         utilisateur = Utilisateur(identifiant_identification, nom_identification, prenom_identification,
                                   email_identification,
@@ -205,7 +206,7 @@ while True:
         print(colored(f"Votre identifiant est {identifiant_identification}", "blue"))
     elif choix_action == "5":
         while True:
-            identifiant_emprunt = input("Qu'elle est votre identifiant? :")
+            identifiant_emprunt = input("Quel est votre identifiant? :")
             utilisateur_emprunt = None
             for i in mediatheque.utilisateurs:
                 if i.identifiant == identifiant_emprunt:
@@ -215,17 +216,17 @@ while True:
                 print(colored("L'identifiant entré n'est pas reconnu dans la base de donnée", "red"))
                 break
             else:
-                liste_media = checher_media_selon_caracteristique()
+                liste_media1 = checher_media_selon_caracteristique()
                 if mediatheque.calculer_nombre_medias == 0:
                     print(colored("Aucun média trouvé", "red"))
                 else:
                     while True:
                         choix_media = int(
                             input("Quel média voulez vous emprunter ? (le premier :1, deuxième: 2, etc.):"))
-                        if choix_media < 1 or len(liste_media) < choix_media:
+                        if choix_media < 1 or len(liste_media1) < choix_media:
                             print(colored("option invalide veuillez recommencer", "red"))
                             continue
-                        media_choisi = liste_media[choix_media - 1]
+                        media_choisi = liste_media1[choix_media - 1]
                         if not media_choisi.disponible:
                             print(colored("Le média que vous voulez emprunter est actuellement indisponible.", "blue"))
                             break
@@ -234,11 +235,12 @@ while True:
                             media_choisi.emprunter()
                             utilisateur_emprunt.historique["Médias empruntés"].append(media_choisi)
                             break
+                    break
 
     elif choix_action == "6":
 
         while True:
-            identifiant_retour = input("Qu'elle est votre identifiant? :")
+            identifiant_retour = input("Quel est votre identifiant? :")
             utilisateur_retour = None
             for i in mediatheque.utilisateurs:
                 if i.identifiant == identifiant_retour:
@@ -271,7 +273,7 @@ while True:
                         break
     elif choix_action == "7":
         while True:
-            identifiant_historique = input("Qu'elle est votre identifiant? :")
+            identifiant_historique = input("Quel est votre identifiant? :")
             utilisateur_hisorique = None
             for i in mediatheque.utilisateurs:
                 if i.identifiant == identifiant_historique:

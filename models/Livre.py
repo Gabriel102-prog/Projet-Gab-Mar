@@ -2,6 +2,7 @@ from models.Medias import Medias  # Import de la classe Medias depuis le module 
 from models.Empruntable import Empruntable  # Import de la classe Empruntable depuis le module models.Empruntable
 from datetime import datetime, timedelta  # Import de datetime et timedelta pour manipuler les dates
 
+
 # La classe Livre hérite de Medias et Empruntable
 class Livre(Medias, Empruntable):
     # Constructeur de la classe Livre, qui initialise tous les attributs nécessaires
