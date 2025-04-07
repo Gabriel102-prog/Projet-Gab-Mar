@@ -5,7 +5,7 @@ from models.CD import CD
 from models.Utilisateur import Utilisateur
 from models.Mediatheque import Mediatheque
 import pytest
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 # Fixture pour initialiser les objets nécessaires pour les tests

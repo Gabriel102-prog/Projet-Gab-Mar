@@ -1,5 +1,5 @@
-from models.Medias import Medias  # Import de la classe Medias depuis le module models.Medias
-from models.Empruntable import Empruntable  # Import de la classe Empruntable depuis le module models.Empruntable
+from models.Medias import Medias  # Import de la classe Medias depuis le module models. Medias
+from models.Empruntable import Empruntable  # Import de la classe Empruntable depuis le module models. Empruntable
 from datetime import datetime, timedelta  # Import de datetime et timedelta pour manipuler les dates
 
 
@@ -28,7 +28,7 @@ class Livre(Medias, Empruntable):
 
     # Méthode pour retourner le livre
     def retourner(self):
-        self.disponible = True  # Le livre devient disponible après le retour
+        self.disponible = True  # Le livre devient disponible après le retour.
         self.date_retour = datetime.now()  # Enregistre la date du retour
         # Si la date de retour est avant ou égale à la date limite
         if self.date_retour_max >= self.date_retour:
