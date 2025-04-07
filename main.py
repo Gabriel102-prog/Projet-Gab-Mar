@@ -298,7 +298,7 @@ while True:
                     print(x.afficher_media())
             print(
                 f"Frais de retard total depuis la création de cet utilisateur: {utilisateur_hisorique.historique["Frais de retard total"]}$")
-
+            break
     elif choix_action == "8":
         print("Medias".center(60, "*"))
         nombre_livres = sum(1 for media in mediatheque.medias if isinstance(media, Livre))
