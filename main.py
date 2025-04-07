@@ -1,6 +1,7 @@
 import locale
 from termcolor import colored
 import os
+
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 os.environ["FORCE_COLOR"] = "1"
 from models.Livre import Livre
