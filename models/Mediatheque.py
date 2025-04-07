@@ -1,4 +1,3 @@
-
 class Mediatheque:
     """Classe sevant à la gestion globale du programme"""
 
@@ -22,10 +21,18 @@ class Mediatheque:
         """Retourne le nombre total d'emprunts"""
         return self.__total_emprunts
 
+    @total_emprunts.setter
+    def total_emprunts(self, total_emprunts2):
+        self.__total_emprunts = total_emprunts2
+
     @property
     def total_retours(self):
         """Retourne le nombre total de retours"""
         return self.__total_retours
+
+    @total_retours.setter
+    def total_retours(self, total_retours2):
+        self.__total_retours = total_retours2
 
     def ajouter_utilisateur(self, nouveau_utilisateur):
         """Méthode pour ajouter un article à la liste"""
