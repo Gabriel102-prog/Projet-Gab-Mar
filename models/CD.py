@@ -1,3 +1,7 @@
+from models.Medias import Medias
+from models.Empruntable import Empruntable
+from datetime import datetime, timedelta
+
 class CD(Medias, Empruntable):
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, artiste, nombre_pistes, date_retour,
                  date_emprunt):

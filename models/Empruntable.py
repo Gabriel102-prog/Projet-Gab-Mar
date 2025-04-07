@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+
+
 class Empruntable(ABC):
     @abstractmethod
     def date_retour_max(self):

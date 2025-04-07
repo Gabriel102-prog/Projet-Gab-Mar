@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+
+
 class Medias(ABC):
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, date_retour, date_emprunt):
         self.__identifiant = identifiant

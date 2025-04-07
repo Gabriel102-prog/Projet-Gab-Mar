@@ -1,3 +1,12 @@
+from termcolor import colored
+import os
+os.environ["FORCE_COLOR"] = "1"
+from models.Livre import Livre
+from models.DVD import DVD
+from models.CD import CD
+from models.Utilisateur import Utilisateur
+from models.Mediatheque import Mediatheque
+
 # Menu interactif
 print(colored(" Bienvenue sur le site Web de Médiathèque.", "blue"))
 nombre_utilisateur = 0

@@ -1,3 +1,7 @@
+from models.Medias import Medias
+from models.Empruntable import Empruntable
+from datetime import datetime, timedelta
+
 class DVD(Medias, Empruntable):
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, realisateur, duree_minutes, date_retour,
                  date_emprunt):

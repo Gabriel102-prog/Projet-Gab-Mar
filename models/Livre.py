@@ -1,3 +1,7 @@
+from models.Medias import Medias
+from models.Empruntable import Empruntable
+from datetime import datetime, timedelta
+
 class Livre(Medias, Empruntable):  # TODO vérifier si Empruntable est implanter
     def __init__(self, identifiant, titre, annee_parution, genre, disponible, auteur, nombre_pages, date_retour,
                  date_emprunt):
