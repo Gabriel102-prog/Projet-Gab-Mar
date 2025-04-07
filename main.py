@@ -288,14 +288,14 @@ while True:
                 print(f"Aucun média n'a été emprunté par {utilisateur_hisorique.prenom} {utilisateur_hisorique.nom}.")
             else:
                 for x in utilisateur_hisorique.historique["Médias empruntés"]:
-                    print(x)
+                    print(x.afficher_media())
 
             print("Médias retournés:")
             if not utilisateur_hisorique.historique["Médias retournés"]:
                 print(f"Aucun média n'a été retourné par {utilisateur_hisorique.prenom} {utilisateur_hisorique.nom}.")
             else:
                 for x in utilisateur_hisorique.historique["Médias retournés"]:
-                    print(x)
+                    print(x.afficher_media())
             print(
                 f"Frais de retard total depuis la création de cet utilisateur: {utilisateur_hisorique.historique["Frais de retard total"]}$")
 
