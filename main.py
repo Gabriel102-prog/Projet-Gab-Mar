@@ -1,9 +1,5 @@
 from termcolor import colored
 import os
-
-
-from unicodedata import digit
-
 os.environ["FORCE_COLOR"] = "1"
 from models.Livre import Livre
 from models.DVD import DVD
