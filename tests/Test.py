@@ -14,6 +14,7 @@ utilisateur1 = Utilisateur("U001", "Gabriel", "Bertrand", "gabriel@exemple.com",
 utilisateur2 = Utilisateur("U002", "Marius", "Séguin", "marius@exemple.com",
                            {"Médias empruntés": [], "Médias retournés": [], "Frais de retard total": 0})
 
+
 mediatheque.ajouter_utilisateur(utilisateur1)
 mediatheque.ajouter_utilisateur(utilisateur2)
 
