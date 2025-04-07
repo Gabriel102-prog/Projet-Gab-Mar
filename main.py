@@ -1,5 +1,6 @@
 from termcolor import colored
 import os
+
 os.environ["FORCE_COLOR"] = "1"
 from models.Livre import Livre
 from models.DVD import DVD
@@ -213,13 +214,13 @@ while True:
                 break
             else:
                 liste_media = checher_media_selon_caracteristique()
-                if len(liste_media) == 0:
+                if mediatheque.calculer_nombre_medias == 0:
                     print(colored("Aucun média trouvé", "red"))
                 else:
                     while True:
                         choix_media = int(
                             input("Quel média voulez vous emprunter ? (le premier :1, deuxième: 2, etc.):"))
-                        if choix_media not in [i + 1 for i in range(len(liste_media))]:
+                        if choix_media not in range(1, mediatheque.calculer_nombre_medias() + 1):
                             print(colored("option invalide veuillez recommencer", "red"))
                             continue
                         media_choisi = liste_media[choix_media - 1]
@@ -287,7 +288,8 @@ while True:
             else:
                 for x in utilisateur_hisorique.historique["Médias retournés"]:
                     print(x)
-            print(f"Frais de retard total depuis la création de cet utilisateur: {utilisateur_hisorique.historique["Frais de retard total"]}$")
+            print(
+                f"Frais de retard total depuis la création de cet utilisateur: {utilisateur_hisorique.historique["Frais de retard total"]}$")
 
     elif choix_action == "8":
         print("Medias".center(60, "*"))

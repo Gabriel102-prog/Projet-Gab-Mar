@@ -61,3 +61,7 @@ class Mediatheque:
                 print(media1.afficher_media())  # Affiche le résultat retourné par la méthode
         else:
             print("Aucun média n'est enregistré.")
+
+    def calculer_nombre_medias(self):
+        """Méthode pour calculer le nombre total de médias dans la médiathèque"""
+        return len(self.__medias)
