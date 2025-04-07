@@ -1,6 +1,9 @@
 from termcolor import colored
 import os
 
+
+from unicodedata import digit
+
 os.environ["FORCE_COLOR"] = "1"
 from models.Livre import Livre
 from models.DVD import DVD
@@ -74,6 +77,8 @@ def checher_media_selon_caracteristique():
             break
         elif critere_recherche == "3":
             annee_recherche = input("Entrez l'année de parution du média : ")
+            if not annee_recherche.isdigit():
+                continue
             for y in mediatheque.medias:
                 if str(y.annee_parution) == annee_recherche:
                     w += 1
@@ -228,6 +233,7 @@ while True:
                             print(colored("Le média que vous voulez emprunter est actuellement indisponible.", "blue"))
                             break
                         else:
+                            mediatheque.total_emprunts += 1
                             media_choisi.emprunter()
                             utilisateur_emprunt.historique["Médias empruntés"].append(media_choisi)
                             break
@@ -258,6 +264,7 @@ while True:
                         if choix_emprunt not in [i + 1 for i in range(len(liste_emprunt))]:
                             print(colored("option invalide veuillez recommencer", "red"))
                             continue
+                        mediatheque.total_retours += 1
                         media_choisi = liste_emprunt[choix_emprunt - 1]
                         nb_jours_retard = media_choisi.retourner()
                         frais_retard = nb_jours_retard * 0.25

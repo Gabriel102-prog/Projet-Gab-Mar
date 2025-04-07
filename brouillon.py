@@ -25,7 +25,6 @@ class Mediatheque:
     def __init__(self):
         self.__medias = []
         self.__utilisateurs = []
-        self.__emprunts = []
         self.__total_emprunts = 0
         self.__total_retours = 0
 
@@ -606,7 +605,8 @@ while True:
             else:
                 for x in utilisateur_hisorique.historique["Médias retournés"]:
                     print(x)
-            print(f"Frais de retard total depuis la création de cet utilisateur: {utilisateur_hisorique.historique["Frais de retard total"]}$")
+            print(
+                f"Frais de retard total depuis la création de cet utilisateur: {utilisateur_hisorique.historique["Frais de retard total"]}$")
 
     elif choix_action == "8":
         print("Medias".center(60, "*"))
